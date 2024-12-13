@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="timefast.FXMLAdministrarEnviosController">
+   <children>
+      <Pane layoutX="1.0" layoutY="1.0" prefHeight="867.0" prefWidth="1208.0" style="-fx-background-color: moccasin;">
+         <children>
+            <Label layoutX="464.0" layoutY="50.0" text="Gestion de Envios">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <TableView id="tblEnvios" fx:id="tblGestionEnvios" layoutX="-2.0" layoutY="317.0" prefHeight="554.0" prefWidth="1208.0">
+               <columns>
+                  <TableColumn fx:id="colNumeroGuia" prefWidth="256.0" text="Numero Guia" />
+                  <TableColumn fx:id="colCosto" prefWidth="222.0" text="Costo" />
+                  <TableColumn fx:id="colDescripcion" prefWidth="438.0" text="Descripcion" />
+                  <TableColumn fx:id="colEstatus" prefWidth="288.0" text="Estatus" />
+               </columns>
+            </TableView>
+            <Button layoutX="116.0" layoutY="146.0" mnemonicParsing="false" onAction="#Registrar" prefHeight="31.0" prefWidth="199.0" text="Registrar" />
+            <Button layoutX="116.0" layoutY="207.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="199.0" text="Editar" />
+            <Button layoutX="468.0" layoutY="146.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="199.0" text="Eliminar" />
+            <TextField layoutX="360.0" layoutY="262.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="485.0" text="Buscar por nombre o numero de personal" />
+            <Button layoutX="468.0" layoutY="207.0" mnemonicParsing="false" onAction="#AgregarOrigen" prefHeight="31.0" prefWidth="199.0" text="Agregar Origen" />
+            <Button layoutX="845.0" layoutY="146.0" mnemonicParsing="false" onAction="#AgregarDestino" prefHeight="31.0" prefWidth="199.0" text="Agregar Destino" />
+            <Label layoutX="393.0" layoutY="95.0" text="Busca y gestiona los envios de Time - Fast">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="845.0" layoutY="207.0" mnemonicParsing="false" onAction="#AsignarConductor" prefHeight="31.0" prefWidth="199.0" text="Asignar Conductor" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

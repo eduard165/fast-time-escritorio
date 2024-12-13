@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="timefast.FXMLAdministrarPaquetesController">
+   <children>
+      <Pane prefHeight="789.0" prefWidth="866.0" style="-fx-background-color: orange;">
+         <children>
+            <Label layoutX="388.0" layoutY="42.0" text="PAQUETES">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button layoutX="102.0" layoutY="180.0" mnemonicParsing="false" onAction="#Agregar" prefHeight="31.0" prefWidth="186.0" text="Agregar" />
+            <Button layoutX="358.0" layoutY="180.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="186.0" text="Editar" />
+            <Button layoutX="609.0" layoutY="180.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="186.0" text="Eliminar" />
+            <TextField layoutX="142.0" layoutY="272.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="603.0" text="Busqueda filtrada" />
+            <TableView id="tblPaquetes" layoutY="353.0" prefHeight="439.0" prefWidth="866.0">
+               <columns>
+                  <TableColumn fx:id="colDescripcion" prefWidth="241.0" text="Descripcion" />
+                  <TableColumn fx:id="colPeso" prefWidth="122.0" text="Peso" />
+                  <TableColumn fx:id="colAlto" prefWidth="138.0" text="Alto" />
+                  <TableColumn fx:id="colAncho" prefWidth="168.0" text="Ancho" />
+                  <TableColumn fx:id="colProfundidad" prefWidth="195.0" text="Profundidad" />
+               </columns>
+            </TableView>
+            <Label layoutX="300.0" layoutY="87.0" text="Gestiona los paquetes de Time -fast">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

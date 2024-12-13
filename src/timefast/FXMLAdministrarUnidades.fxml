@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="timefast.FXMLAdministrarUnidadesController">
+   <children>
+      <Pane layoutX="1.0" prefHeight="783.0" prefWidth="876.0" style="-fx-background-color: beige;">
+         <children>
+            <Label layoutX="374.0" layoutY="38.0" text="UNIDADES">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <TableView id="tblUnidades" layoutY="314.0" prefHeight="469.0" prefWidth="876.0">
+               <columns>
+                  <TableColumn fx:id="colMarca" prefWidth="130.0" text="Marca" />
+                  <TableColumn fx:id="colModelo" prefWidth="123.0" text="Modelo" />
+                  <TableColumn fx:id="colAnio" minWidth="0.0" text="Año" />
+                  <TableColumn fx:id="colVIN" prefWidth="117.0" text="VIN" />
+                  <TableColumn fx:id="colNumeroInterno" prefWidth="125.0" text="Numero Interno" />
+                  <TableColumn fx:id="colTipo" prefWidth="148.0" text="Tipo" />
+                  <TableColumn fx:id="colConductor" prefWidth="152.0" text="Conductor" />
+               </columns>
+            </TableView>
+            <Button layoutX="75.0" layoutY="169.0" mnemonicParsing="false" onAction="#Agregar" prefHeight="31.0" prefWidth="196.0" text="Agregar" />
+            <Button layoutX="340.0" layoutY="169.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="196.0" text="Editar" />
+            <Button layoutX="607.0" layoutY="169.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="196.0" text="Eliminar" />
+            <TextField layoutX="269.0" layoutY="237.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="338.0" text="Busqueda filtrada" />
+            <Label layoutX="287.0" layoutY="74.0" text="Gestiona las unidades de Time -Fast">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

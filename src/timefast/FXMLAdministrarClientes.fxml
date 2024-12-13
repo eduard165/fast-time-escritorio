@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLAdministrarClientesController">
+   <children>
+      <Pane prefHeight="679.0" prefWidth="868.0" style="-fx-background-color: teal;">
+         <children>
+            <Label layoutX="268.0" layoutY="21.0" text="Modulo de Colaboradores">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="278.0" layoutY="72.0" text="Gestiona los colaboradores de Time-Fast" />
+            <Button layoutX="14.0" layoutY="116.0" mnemonicParsing="false" onAction="#registrar" prefHeight="31.0" prefWidth="178.0" text="Registrar" />
+            <TextField layoutX="233.0" layoutY="173.0" onKeyTyped="#buscar" prefHeight="31.0" prefWidth="387.0" promptText="Buscar por nombre, numero de personal o rol" />
+            <Button layoutX="221.0" layoutY="116.0" mnemonicParsing="false" onAction="#editar" prefHeight="31.0" prefWidth="178.0" text="Editar" />
+            <Button layoutX="666.0" layoutY="116.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="31.0" prefWidth="178.0" text="Eliminar" />
+            <TableView fx:id="tbClientes" layoutY="234.0" prefHeight="448.0" prefWidth="868.0">
+               <columns>
+                  <TableColumn fx:id="colNombre" prefWidth="116.0" text="Nombre" />
+                  <TableColumn fx:id="colApellidoPaterno" prefWidth="165.0" text="Apellido Paterno" />
+                  <TableColumn fx:id="colApellidoMaterno" prefWidth="192.0" text="Apellido Materno" />
+                  <TableColumn fx:id="colCorreoElectronico" minWidth="5.0" prefWidth="191.0" text="Correo Electronico" />
+                  <TableColumn fx:id="colTelefono" prefWidth="203.0" text="Telefono" />
+               </columns>
+            </TableView>
+            <Button layoutX="434.0" layoutY="116.0" mnemonicParsing="false" onAction="#agregarDireccion" prefHeight="31.0" prefWidth="178.0" text="Agregar Direccion" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

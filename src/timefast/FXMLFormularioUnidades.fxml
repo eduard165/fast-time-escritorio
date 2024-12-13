@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="timefast.FXMLFormularioUnidadesController">
+   <children>
+      <Pane prefHeight="766.0" prefWidth="777.0" style="-fx-background-color: beige;">
+         <children>
+            <ImageView fitHeight="119.0" fitWidth="173.0" layoutX="315.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Time-Fast-Escritorio/src/media/unidad.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="245.0" layoutY="41.0" text="FORMULARIO UNIDADES">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="249.0" layoutY="83.0" text="Gestiona las unidades de Time - Fast">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="270.0" text="Marca" />
+            <Label layoutX="52.0" layoutY="373.0" text="Modelo" />
+            <Label layoutX="61.0" layoutY="487.0" text="Año" />
+            <Label layoutX="62.0" layoutY="594.0" text="VIN" />
+            <Label layoutX="456.0" layoutY="270.0" text="Numero Interno" />
+            <Label layoutX="459.0" layoutY="373.0" text="Tipo" />
+            <Label layoutX="459.0" layoutY="487.0" text="Conductor" />
+            <TextField layoutX="53.0" layoutY="291.0" prefHeight="31.0" prefWidth="256.0" />
+            <TextField layoutX="54.0" layoutY="405.0" prefHeight="31.0" prefWidth="256.0" />
+            <TextField layoutX="55.0" layoutY="508.0" prefHeight="31.0" prefWidth="256.0" />
+            <TextField layoutX="55.0" layoutY="622.0" prefHeight="31.0" prefWidth="256.0" />
+            <TextField layoutX="459.0" layoutY="291.0" prefHeight="31.0" prefWidth="256.0" />
+            <TextField layoutX="459.0" layoutY="405.0" prefHeight="31.0" prefWidth="256.0" />
+            <TextField layoutX="459.0" layoutY="508.0" prefHeight="31.0" prefWidth="256.0" />
+            <Button layoutX="331.0" layoutY="685.0" mnemonicParsing="false" onAction="#Guardar" text="Guardar Unidad" />
+            <Label fx:id="lbErrorMarca" layoutX="52.0" layoutY="333.0" prefHeight="21.0" prefWidth="256.0" textFill="#e41212" />
+            <Label fx:id="lbErrorModelo" layoutX="52.0" layoutY="444.0" prefHeight="21.0" prefWidth="256.0" textFill="#ee0606" />
+            <Label fx:id="lbErrorAnio" layoutX="57.0" layoutY="547.0" prefHeight="21.0" prefWidth="256.0" textFill="#d30b0b" />
+            <Label fx:id="lbErrorVIN" layoutX="57.0" layoutY="664.0" prefHeight="21.0" prefWidth="256.0" textFill="#ee0a0a" />
+            <Label fx:id="lbErrorNumeroInterno" layoutX="459.0" layoutY="333.0" prefHeight="21.0" prefWidth="256.0" textFill="#eb0808" />
+            <Label fx:id="lbErrorTipo" layoutX="459.0" layoutY="444.0" prefHeight="21.0" prefWidth="256.0" textFill="#fc0505" />
+            <Label fx:id="lbErrorConductor" layoutX="459.0" layoutY="547.0" prefHeight="21.0" prefWidth="256.0" textFill="#f50505" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

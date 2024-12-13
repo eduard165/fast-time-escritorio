@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="timefast.FXMLFormularioEnviosController">
+   <children>
+      <Pane prefHeight="838.0" prefWidth="771.0" style="-fx-background-color: lightcoral;">
+         <children>
+            <Label layoutX="44.0" layoutY="19.0" text="FORMULARIO ENVIOS">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="44.0" layoutY="55.0" text="Gestiona los envios de Time - Fast">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="90.0" layoutY="277.0" text="Numero de guia" />
+            <Label layoutX="91.0" layoutY="519.0" text="Estatus" />
+            <TextField fx:id="tfNumeroGuia" layoutX="91.0" layoutY="309.0" />
+            <TextField fx:id="tfCosto" layoutX="91.0" layoutY="428.0" />
+            <Label layoutX="91.0" layoutY="400.0" text="Costo" />
+            <Label layoutX="85.0" layoutY="635.0" text="Direccion Origen" />
+            <TextField fx:id="tfDireccionOrigen" layoutX="81.0" layoutY="661.0" />
+            <Button layoutX="329.0" layoutY="735.0" mnemonicParsing="false" onAction="#Guardar" text="Guardar envio" />
+            <ImageView fitHeight="182.0" fitWidth="200.0" layoutX="314.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Time-Fast-Escritorio/src/media/envios.png" />
+               </image>
+            </ImageView>
+            <ComboBox layoutX="91.0" layoutY="547.0" prefHeight="31.0" prefWidth="186.0" promptText="Elije un estatus" />
+            <Label layoutX="475.0" layoutY="277.0" text="Direccion Destino" />
+            <TextField fx:id="tfDireccionDestino" layoutX="475.0" layoutY="309.0" />
+            <Label fx:id="lbDescripcion" layoutX="483.0" layoutY="400.0" style="visibility: false;" text="Descripcion" />
+            <TextArea fx:id="taDescripcion" layoutX="483.0" layoutY="430.0" prefHeight="200.0" prefWidth="232.0" style="visibility: false;" />
+            <Label fx:id="lbErrorNumeroGuia" layoutX="93.0" layoutY="348.0" prefHeight="21.0" prefWidth="182.0" textFill="#f50505" />
+            <Label fx:id="lbErrorCosto" layoutX="93.0" layoutY="474.0" prefHeight="21.0" prefWidth="182.0" textFill="#f20303" />
+            <Label fx:id="lbErrorDireccionOrigen" layoutX="81.0" layoutY="706.0" prefHeight="21.0" prefWidth="186.0" textFill="#e40505" />
+            <Label fx:id="lbErrorDireccionDestino" layoutX="475.0" layoutY="348.0" prefHeight="21.0" prefWidth="186.0" textFill="#ee0c0c" />
+            <Label fx:id="lbErrorDescripcion" layoutX="483.0" layoutY="646.0" prefHeight="21.0" prefWidth="232.0" textFill="#f20303" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

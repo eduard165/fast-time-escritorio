@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="829.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioColaboradoresController">
+   <children>
+      <Pane prefHeight="829.0" prefWidth="875.0" style="-fx-background-color: moccasin;">
+         <children>
+            <Label layoutX="364.0" layoutY="24.0" text="Formulario">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="299.0" layoutY="60.0" text="Gestiona los colaboradores de Time - Fast" />
+            <Label layoutX="98.0" layoutY="347.0" text="Nombre" />
+            <Label layoutX="95.0" layoutY="445.0" text="Apellido Materno" />
+            <Label layoutX="98.0" layoutY="549.0" text="Correo Electronico" />
+            <Label layoutX="96.0" layoutY="652.0" text="Contraseña" />
+            <Label layoutX="477.0" layoutY="347.0" text="Apellido Paterno" />
+            <Label layoutX="477.0" layoutY="445.0" text="CURP" />
+            <Label layoutX="477.0" layoutY="549.0" text="Numero de Personal" />
+            <Label layoutX="477.0" layoutY="652.0" text="Rol" />
+            <TextField fx:id="tfNombre" layoutX="93.0" layoutY="379.0" prefHeight="31.0" prefWidth="306.0" />
+            <TextField fx:id="tfApellidoMaterno" layoutX="93.0" layoutY="477.0" prefHeight="31.0" prefWidth="306.0" />
+            <TextField fx:id="tfCorreoElectronico" layoutX="93.0" layoutY="578.0" prefHeight="31.0" prefWidth="306.0" />
+            <TextField fx:id="tfApellidoPaterno" layoutX="477.0" layoutY="379.0" prefHeight="31.0" prefWidth="306.0" />
+            <TextField fx:id="tfCURP" layoutX="477.0" layoutY="477.0" prefHeight="31.0" prefWidth="306.0" />
+            <TextField fx:id="tfNumeroPersonal" layoutX="477.0" layoutY="578.0" prefHeight="31.0" prefWidth="306.0" />
+            <Button layoutX="388.0" layoutY="760.0" mnemonicParsing="false" onAction="#registrarColaborador" text="Guardar " />
+            <ImageView fx:id="imFoto" fitHeight="176.0" fitWidth="230.0" layoutX="339.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../media/colaborativo.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="371.0" layoutY="288.0" mnemonicParsing="false" onAction="#registrarFoto" text="Registrar Foto" />
+            <ComboBox fx:id="cbRol" layoutX="477.0" layoutY="680.0" prefWidth="150.0" />
+            <TextField fx:id="tfPassword" layoutX="93.0" layoutY="680.0" prefHeight="31.0" prefWidth="306.0" />
+            <Label fx:id="lbErrorNombre" layoutX="93.0" layoutY="410.0" prefHeight="21.0" prefWidth="306.0" textFill="#eb0404" />
+            <Label fx:id="lbErrorApellidoMaterno" layoutX="93.0" layoutY="508.0" prefHeight="21.0" prefWidth="306.0" textFill="#ee0808" />
+            <Label fx:id="lbErrorApellidoPaterno" layoutX="477.0" layoutY="410.0" prefHeight="21.0" prefWidth="306.0" textFill="#e80e0e" />
+            <Label fx:id="lbErrorCorreoElectronico" layoutX="93.0" layoutY="609.0" prefHeight="21.0" prefWidth="306.0" textFill="#ee0909" />
+            <Label fx:id="lbErrorCURP" layoutX="474.0" layoutY="508.0" prefHeight="21.0" prefWidth="306.0" textFill="#f50606" />
+            <Label fx:id="lbErrorNumeroPersonal" layoutX="477.0" layoutY="609.0" prefHeight="21.0" prefWidth="306.0" textFill="#f50808" />
+            <Label fx:id="lbErrorContraseña" layoutX="93.0" layoutY="711.0" prefHeight="21.0" prefWidth="306.0" textFill="#f80606" />
+            <Label fx:id="lbErrorRol" layoutX="477.0" layoutY="711.0" prefHeight="21.0" prefWidth="306.0" textFill="#f80606" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
