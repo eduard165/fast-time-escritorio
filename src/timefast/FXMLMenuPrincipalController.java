@@ -76,14 +76,17 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void irUnidades(MouseEvent event) {
+        cambiarVentana("Administrador Unidades", "FXMLAdministrarUnidades.fxml");
     }
 
     @FXML
     private void irEnvios(MouseEvent event) {
+        cambiarVentana("Administrador Envios", "FXMLAdministrarEnvios.fxml");
     }
 
     @FXML
     private void irPaquetes(MouseEvent event) {
+        cambiarVentana("Administrador Paquetes", "FXMLAdministrarPaquetes.fxml");
     }
 
     private void cambiarVentana(String titulo, String archivo) {

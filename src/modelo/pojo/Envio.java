@@ -291,6 +291,11 @@ public class Envio {
     public void setCorreoElectronicoColaborador(String correoElectronicoColaborador) {
         this.correoElectronicoColaborador = correoElectronicoColaborador;
     }
+
+    @Override
+    public String toString() {
+        return numeroGuia;
+    }
     
 
 }

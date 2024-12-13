@@ -99,9 +99,9 @@ public class EnviosDAO {
         return respuesta;
     }
 
-    public static List<Cliente> obtenerClientes() {
-        List<Cliente> clientes = null;
-        String url = Constantes.URL_WS + "clientes/obtenerTodos";
+    public static List<Envio> obtenerEnvios() {
+        List<Envio> clientes = null;
+        String url = Constantes.URL_WS + "envios/todos";
         RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
 
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {

@@ -84,7 +84,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cargarTiposUsuario();
+        cargarTiposRoles();
     }
 
     public void inicializarValores(NotificadorOperaciones observador, Colaborador colaboradorEdicion) {
@@ -166,7 +166,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         return 0;
     }
 
-    private void cargarTiposUsuario() {
+    private void cargarTiposRoles() {
         List<Rol> roles = RolDAO.obtenerRol();
         if (roles != null && !roles.isEmpty()) {
             tiposColaboradores = FXCollections.observableArrayList(roles);

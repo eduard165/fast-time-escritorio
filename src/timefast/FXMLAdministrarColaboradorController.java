@@ -93,10 +93,8 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
     @FXML
     private void eliminar(ActionEvent event) {
         Colaborador colaborador = tbColaboradores.getSelectionModel().getSelectedItem();
-
         if (colaborador != null) {
             Mensaje mjs = ColaboradorDAO.eliminarColaborador(colaborador.getIdColaborador());
-
             if (!mjs.isError()) {
                 Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha eliminado con exito", "Eliminacion exitosa");
                 cargarInformacionTabla();
@@ -108,7 +106,6 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
         }
     }
 
-
     private void configurarTabla() {
         colNumeroPersonal.setCellValueFactory(new PropertyValueFactory("numeroPersonal"));
         colApellidoMaterno.setCellValueFactory(new PropertyValueFactory("apellidoMaterno"));
@@ -119,12 +116,10 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
     }
 
     private void cargarInformacionTabla() {
-
         OLcolaboradores = FXCollections.observableArrayList();
         List<Colaborador> listaWS = ColaboradorDAO.obtenerColaboradores();
         OLcolaboradores.addAll(listaWS);
         tbColaboradores.setItems(OLcolaboradores);
-
     }
 
     private void irFormulario(NotificadorOperaciones observador, Colaborador colaborador) {
@@ -133,11 +128,10 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
             Parent root = loader.load();
             FXMLFormularioColaboradoresController controlador = loader.getController();
             controlador.inicializarValores(observador, colaborador);
-
             Stage escenarioAdministrador = new Stage();
             Scene scene = new Scene(root);
             escenarioAdministrador.setScene(scene);
-            escenarioAdministrador.setTitle("Administrador de colaboradores");
+            escenarioAdministrador.setTitle("Formulario de colaboradores");
             escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
             escenarioAdministrador.showAndWait();
         } catch (Exception e) {
