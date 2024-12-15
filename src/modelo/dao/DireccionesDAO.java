@@ -16,27 +16,154 @@ import utils.Constantes;
 
 public class DireccionesDAO {
 
+    // Insertar Dirección Cliente
     public static Mensaje insertarDireccionCliente(Direccion direccion) {
-        return realizarPeticion(Constantes.URL_WS + "direcciones/registrar-cliente", direccion, "POST");
+        Mensaje respuesta = new Mensaje();
+        try {
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(direccion);
+
+            System.out.println("[Insertar Dirección Cliente]: " + parametrosJSON);
+
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPOSTJson(Constantes.URL_WS + "direcciones/registrar-cliente", parametrosJSON);
+
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la dirección: " + e.getMessage());
+            System.err.println("[Error]: " + e.getMessage());
+        }
+        return respuesta;
     }
 
+    // Insertar Dirección Origen
     public static Mensaje insertarDireccionOrigen(Direccion direccion) {
-        return realizarPeticion(Constantes.URL_WS + "direcciones/registrar-origen", direccion, "POST");
+        Mensaje respuesta = new Mensaje();
+        try {
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(direccion);
+
+            System.out.println("[Insertar Dirección Origen]: " + parametrosJSON);
+
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPOSTJson(Constantes.URL_WS + "direcciones/registrar-origen", parametrosJSON);
+
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la dirección: " + e.getMessage());
+            System.err.println("[Error]: " + e.getMessage());
+        }
+        return respuesta;
     }
 
+    // Insertar Dirección Destino
     public static Mensaje insertarDireccionDestino(Direccion direccion) {
-        return realizarPeticion(Constantes.URL_WS + "direcciones/registrar-destino", direccion, "POST");
+        Mensaje respuesta = new Mensaje();
+        try {
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(direccion);
+
+            System.out.println("[Insertar Dirección Destino]: " + parametrosJSON);
+
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPOSTJson(Constantes.URL_WS + "direcciones/registrar-destino", parametrosJSON);
+
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la dirección: " + e.getMessage());
+            System.err.println("[Error]: " + e.getMessage());
+        }
+        return respuesta;
     }
 
+    // Editar Dirección Cliente
     public static Mensaje editarDireccionCliente(Direccion direccion) {
-        return realizarPeticion(Constantes.URL_WS + "direcciones/editar-cliente", direccion, "PUT");
+        Mensaje respuesta = new Mensaje();
+        try {
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(direccion);
+
+            System.out.println("[Editar Dirección Cliente]: " + parametrosJSON);
+
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUTJSON(Constantes.URL_WS + "direcciones/editar-cliente", parametrosJSON);
+
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la dirección: " + e.getMessage());
+            System.err.println("[Error]: " + e.getMessage());
+        }
+        return respuesta;
     }
 
+    // Editar Dirección Origen
     public static Mensaje editarDireccionOrigen(Direccion direccion) {
-        return realizarPeticion(Constantes.URL_WS + "direcciones/editar-origen", direccion, "PUT");
+        Mensaje respuesta = new Mensaje();
+        try {
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(direccion);
+
+            System.out.println("[Editar Dirección Origen]: " + parametrosJSON);
+
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUTJSON(Constantes.URL_WS + "direcciones/editar-origen", parametrosJSON);
+
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la dirección: " + e.getMessage());
+            System.err.println("[Error]: " + e.getMessage());
+        }
+        return respuesta;
     }
+
+    // Editar Dirección Destino
     public static Mensaje editarDireccionDestino(Direccion direccion) {
-        return realizarPeticion(Constantes.URL_WS + "direcciones/editar-destino", direccion, "PUT");
+        Mensaje respuesta = new Mensaje();
+        try {
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(direccion);
+
+            System.out.println("[Editar Dirección Destino]: " + parametrosJSON);
+
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUTJSON(Constantes.URL_WS + "direcciones/editar-destino", parametrosJSON);
+
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la dirección: " + e.getMessage());
+            System.err.println("[Error]: " + e.getMessage());
+        }
+        return respuesta;
     }
 
     public static RespuestaDireccion buscarDireccionCliente(int idCliente) {
@@ -61,9 +188,9 @@ public class DireccionesDAO {
 
         if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();
-            Type tipoListaEstado = new TypeToken<List<Estado>>() {}.getType();
+            Type tipoListaEstado = new TypeToken<List<Estado>>() {
+            }.getType();
             respuesta = gson.fromJson(respuestaWS.getContenido(), tipoListaEstado);
-            System.out.println(gson.fromJson(respuestaWS.getContenido(), tipoListaEstado) + "");
             return gson.fromJson(respuestaWS.getContenido(), tipoListaEstado);
         }
         return null;
@@ -75,7 +202,8 @@ public class DireccionesDAO {
 
         if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();
-            Type tipoListaMunicipio = new TypeToken<List<Municipio>>() {}.getType();
+            Type tipoListaMunicipio = new TypeToken<List<Municipio>>() {
+            }.getType();
             return gson.fromJson(respuestaWS.getContenido(), tipoListaMunicipio);
         }
         return null;
@@ -86,6 +214,7 @@ public class DireccionesDAO {
         try {
             Gson gson = new Gson();
             String parametrosJSON = gson.toJson(direccion);
+            System.out.println("Objeto JSON de Direccion: " + gson.toJson(direccion));
 
             RespuestaHTTP respuestaWS;
 
@@ -99,6 +228,7 @@ public class DireccionesDAO {
 
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+
             } else {
                 respuesta.setError(true);
                 respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());

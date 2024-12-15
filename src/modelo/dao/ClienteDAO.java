@@ -79,11 +79,11 @@ public class ClienteDAO {
         List<Cliente> clientes = null;
         String url = Constantes.URL_WS + "clientes/todos";
         RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
-
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();
             try {
-                Type tipoListaCliente = new TypeToken<List<Cliente>>() {}.getType();
+                Type tipoListaCliente = new TypeToken<List<Cliente>>() {
+                }.getType();
                 clientes = gson.fromJson(respuesta.getContenido(), tipoListaCliente);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -92,4 +92,18 @@ public class ClienteDAO {
         return clientes;
     }
 
+    public static Cliente obtenerClientesPorId(int idCliente) {
+        Cliente clientes = null;
+        String url = Constantes.URL_WS + "clientes/buscar-cliente/" + idCliente;
+        RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                clientes = gson.fromJson(respuesta.getContenido(), Cliente.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return clientes;
+    }
 }

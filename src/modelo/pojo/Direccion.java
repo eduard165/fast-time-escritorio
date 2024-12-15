@@ -130,5 +130,10 @@ public class Direccion {
         this.idEnvioDestino = idEnvioDestino;
     }
 
+    @Override
+    public String toString() {
+        return "Direccion{" + "idDireccion=" + idDireccion + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", municipio=" + municipio + ", estado=" + estado + ", idMunicipio=" + idMunicipio + ", idCliente=" + idCliente + ", idEnvioOrigen=" + idEnvioOrigen + ", idEnvioDestino=" + idEnvioDestino + ", idEstado=" + idEstado + '}';
+    }
+
     
 }

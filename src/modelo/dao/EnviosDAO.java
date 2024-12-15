@@ -11,6 +11,7 @@ import modelo.pojo.Cliente;
 import modelo.pojo.Mensaje;
 import modelo.pojo.respuestasPojos.RespuestaHTTP;
 import modelo.pojo.Envio;
+import modelo.pojo.EstadoEnvio;
 import utils.Constantes;
 
 public class EnviosDAO {
@@ -83,7 +84,7 @@ public class EnviosDAO {
         Mensaje respuesta = new Mensaje();
         String urlServicio = Constantes.URL_WS + "envios/actualizarEstado";
         try {
-            String parametros = "idEnvio=" + idEnvio + "&idEstado=" + idEstado + "&descripcion=" + descripcion;
+            String parametros = "idEnvio=" + idEnvio + "&idEstadoEnvio=" + idEstado + "&descripcion=" + descripcion;
             RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUT(urlServicio, parametros);
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
@@ -100,7 +101,7 @@ public class EnviosDAO {
     }
 
     public static List<Envio> obtenerEnvios() {
-        List<Envio> clientes = null;
+        List<Envio> envios = null;
         String url = Constantes.URL_WS + "envios/todos";
         RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
 
@@ -109,11 +110,28 @@ public class EnviosDAO {
             try {
                 Type tipoListaEnvio = new TypeToken<List<Envio>>() {
                 }.getType();
-                clientes = gson.fromJson(respuesta.getContenido(), tipoListaEnvio);
+                envios = gson.fromJson(respuesta.getContenido(), tipoListaEnvio);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return clientes;
+        return envios;
+    }
+     public static List<EstadoEnvio> estadosEnvio() {
+        List<EstadoEnvio> EstadosEnvio = null;
+        String url = Constantes.URL_WS + "estados/todo";
+        RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
+
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                Type tipoListaEstadoEnvio = new TypeToken<List<EstadoEnvio>>() {
+                }.getType();
+                EstadosEnvio = gson.fromJson(respuesta.getContenido(), tipoListaEstadoEnvio);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return EstadosEnvio;
     }
 }

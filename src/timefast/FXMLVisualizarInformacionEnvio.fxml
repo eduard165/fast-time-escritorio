@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLVisualizarInformacionEnvioController">
+   <children>
+      <Pane prefHeight="762.0" prefWidth="978.0" style="-fx-background-color: lightcoral;">
+         <children>
+            <Label layoutX="350.0" layoutY="14.0" text="FORMULARIO ENVIOS">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="350.0" layoutY="50.0" text="Gestiona los envios de Time - Fast">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="182.0" fitWidth="200.0" layoutX="405.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../media/envios.png" />
+               </image>
+            </ImageView>
+            <Pane layoutY="222.0" prefHeight="543.0" prefWidth="971.0">
+               <children>
+                  <Pane layoutX="-3.0" prefHeight="257.0" prefWidth="302.0" style="-fx-border-color: black;">
+                     <children>
+                        <Label layoutX="69.0" layoutY="14.0" text="Inf. Envio">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="24.0" layoutY="50.0" text="Numero de Guia :" />
+                        <Label layoutX="24.0" layoutY="90.0" text="Costo :" />
+                        <Label layoutX="21.0" layoutY="129.0" text="Estado :" />
+                        <Label layoutX="24.0" layoutY="170.0" text="Descripcion :" />
+                        <Label fx:id="lbNumeroGuia" layoutX="140.0" layoutY="50.0" />
+                        <Label fx:id="lbCosto" layoutX="71.0" layoutY="90.0" />
+                        <Label fx:id="lbEstado" layoutX="72.0" layoutY="129.0" />
+                        <Label fx:id="lbDescripcion" layoutX="109.0" layoutY="170.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="299.0" prefHeight="257.0" prefWidth="332.0" style="-fx-border-color: black;">
+                     <children>
+                        <Label layoutX="112.0" layoutY="14.0" text="Inf. Cliente ">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="65.0" text="Nombre : " />
+                        <Label layoutX="14.0" layoutY="118.0" text="Correo Electronico :" />
+                        <Label layoutX="14.0" layoutY="174.0" text="Telefono :" />
+                        <Label fx:id="lbNombreCliente" layoutX="79.0" layoutY="65.0" />
+                        <Label fx:id="lbCorreoCliente" layoutX="143.0" layoutY="118.0" />
+                        <Label fx:id="lbTelefonoCliente" layoutX="79.0" layoutY="174.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="-3.0" layoutY="255.0" prefHeight="288.0" prefWidth="489.0" style="-fx-border-color: black;">
+                     <children>
+                        <Label layoutX="110.0" layoutY="14.0" text="Inf. Direccion Origen">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="61.0" prefHeight="21.0" prefWidth="47.0" text="Calle :" />
+                        <Label layoutX="26.0" layoutY="98.0" text="Numero :" />
+                        <Label layoutX="26.0" layoutY="132.0" text="Colonia :" />
+                        <Label layoutX="26.0" layoutY="165.0" text="Codigo Postal :" />
+                        <Label layoutX="25.0" layoutY="205.0" text="Municipio :" />
+                        <Label layoutX="24.0" layoutY="243.0" text="Estado :" />
+                        <Label fx:id="lbCalleOrigen" layoutX="72.0" layoutY="61.0" />
+                        <Label fx:id="lbNumeroOrigen" layoutX="97.0" layoutY="98.0" />
+                        <Label fx:id="lbColoniaOrigen" layoutX="87.0" layoutY="132.0" />
+                        <Label fx:id="lbCodigoPostalOrigen" layoutX="132.0" layoutY="165.0" />
+                        <Label fx:id="lbMunicipioOrigen" layoutX="109.0" layoutY="205.0" />
+                        <Label fx:id="lbEstadoOrigen" layoutX="83.0" layoutY="243.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="631.0" prefHeight="257.0" prefWidth="344.0" style="-fx-border-color: black;">
+                     <children>
+                        <Label layoutX="92.0" layoutY="14.0" text="Inf. Conductor">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="65.0" text="Nombre : " />
+                        <Label layoutX="14.0" layoutY="118.0" text="Correo Electronico :" />
+                        <Label layoutX="20.0" layoutY="168.0" text="Numero de Personal :" />
+                        <Label fx:id="lbNombreColaborador" layoutX="79.0" layoutY="65.0" />
+                        <Label fx:id="lbNumeroPersonal" layoutX="171.0" layoutY="168.0" />
+                        <Label fx:id="lbCorreoColaborador" layoutX="150.0" layoutY="118.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="486.0" layoutY="255.0" prefHeight="288.0" prefWidth="489.0" style="-fx-border-color: black;">
+                     <children>
+                        <Label layoutX="115.0" layoutY="14.0" text="Inf. Direccion Destino">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="61.0" prefHeight="21.0" prefWidth="47.0" text="Calle :" />
+                        <Label layoutX="26.0" layoutY="98.0" text="Numero :" />
+                        <Label layoutX="26.0" layoutY="132.0" text="Colonia :" />
+                        <Label layoutX="26.0" layoutY="165.0" text="Codigo Postal :" />
+                        <Label layoutX="25.0" layoutY="205.0" text="Municipio :" />
+                        <Label layoutX="24.0" layoutY="243.0" text="Estado :" />
+                        <Label fx:id="lbEstadoDestino" layoutX="83.0" layoutY="243.0" />
+                        <Label fx:id="lbMunicipioDestino" layoutX="107.0" layoutY="205.0" />
+                        <Label fx:id="lbCodigoPostalDestino" layoutX="134.0" layoutY="165.0" />
+                        <Label fx:id="lbColoniaDestino" layoutX="91.0" layoutY="135.0" />
+                        <Label fx:id="lbNumeroDestino" layoutX="101.0" layoutY="101.0" />
+                        <Label fx:id="lbCalleDestino" layoutX="76.0" layoutY="64.0" />
+                     </children>
+                  </Pane>
+               </children></Pane>
+            <ImageView fitHeight="75.0" fitWidth="156.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#regresar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../media/cerrar-sesion.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

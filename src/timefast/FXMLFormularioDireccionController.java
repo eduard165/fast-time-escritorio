@@ -21,6 +21,7 @@ import modelo.pojo.Estado;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Municipio;
 import modelo.pojo.respuestasPojos.RespuestaDireccion;
+import observador.NotificadorOperaciones;
 import utils.Utilidades;
 
 public class FXMLFormularioDireccionController implements Initializable {
@@ -54,6 +55,7 @@ public class FXMLFormularioDireccionController implements Initializable {
     private boolean isEditable = false;
     ObservableList<Municipio> municipios;
     ObservableList<Estado> estados;
+    private NotificadorOperaciones observador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,36 +65,49 @@ public class FXMLFormularioDireccionController implements Initializable {
 
     @FXML
     private void Guardar(ActionEvent event) {
-        obtenerDatos();
-        if (validarCampos()) {
+        if (!validarCampos()) {
+            obtenerDatos();
+            System.out.println(isEditable);
+
             if (isEditable) {
+                System.out.println(direccionEdicion.toString());
                 editarDireccion(direccionEdicion);
+                observador.notificacionOperacion("", "");
+
             } else {
+                System.out.println(direccionEdicion.toString());
                 registrarDireccion(direccionEdicion);
+                observador.notificacionOperacion("", "");
+
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion", "ERROR");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion " + validarCampos(), "ERROR");
 
         }
     }
 
-    public void incializarValoresCliente(Integer idCliente, Integer idEnvioOrigen, Integer idDIreccionDestino) {
-        if (idCliente != 0) {
+    public void incializarValoresCliente(NotificadorOperaciones observador, Integer idCliente, Integer idEnvioOrigen, Integer idEnvioDestino) {
+        this.observador = observador;
+
+        if (idCliente != null) {
             obtenerDireccionCliente(idCliente);
-            if (direccionEdicion != null) {
+            if (direccionEdicion.getIdDireccion() != null) {
                 isEditable = true;
             }
         }
-        if (idEnvioOrigen != 0) {
+        if (idEnvioOrigen != null) {
             obtenerDireccionOrigen(idEnvioOrigen);
-            if (direccionEdicion != null) {
+            if (direccionEdicion.getIdDireccion() != null) {
                 isEditable = true;
+                System.out.println("ENTREEEEE");
             }
         }
-        if (idEnvioOrigen != 0) {
-            obtenerDireccionDestino(idDIreccionDestino);
-            if (direccionEdicion != null) {
+        if (idEnvioDestino != null) {
+            obtenerDireccionDestino(idEnvioDestino);
+            if (direccionEdicion.getIdDireccion() != null) {
                 isEditable = true;
+                System.out.println("ENTREEEEE");
+
             }
         }
     }
@@ -123,25 +138,32 @@ public class FXMLFormularioDireccionController implements Initializable {
 
     private void obtenerDireccionCliente(Integer idCliente) {
         RespuestaDireccion rest = DireccionesDAO.buscarDireccionCliente(idCliente);
-        direccionEdicion = rest.getDireccion();
+        if (rest.getDireccion() != null) {
+            direccionEdicion = rest.getDireccion();
+            cargarDatos(direccionEdicion);
+        }
         direccionEdicion.setIdCliente(idCliente);
-        cargarDatos(direccionEdicion);
 
     }
 
     private void obtenerDireccionOrigen(Integer idenvioOrigen) {
         RespuestaDireccion rest = DireccionesDAO.buscarDireccionOrigen(idenvioOrigen);
-        direccionEdicion = rest.getDireccion();
+        if (rest.getDireccion() != null) {
+            direccionEdicion = rest.getDireccion();
+            cargarDatos(direccionEdicion);
+        }
         direccionEdicion.setIdEnvioOrigen(idenvioOrigen);
-        cargarDatos(direccionEdicion);
 
     }
 
     private void obtenerDireccionDestino(Integer idenvioDestino) {
         RespuestaDireccion rest = DireccionesDAO.buscarDireccionDestino(idenvioDestino);
-        direccionEdicion = rest.getDireccion();
+        if (rest.getDireccion() != null) {
+            direccionEdicion = rest.getDireccion();
+            cargarDatos(direccionEdicion);
+        }
         direccionEdicion.setIdEnvioDestino(idenvioDestino);
-        cargarDatos(direccionEdicion);
+
     }
 
     private void cargarDatos(Direccion direccion) {
@@ -154,8 +176,8 @@ public class FXMLFormularioDireccionController implements Initializable {
             int estadoIndex = buscarEstado(direccion.getIdEstado());
             if (estadoIndex != -1) {
                 cbEstados.getSelectionModel().select(estadoIndex);
-                cargarInformacionMunicipios(direccion.getIdEstado()); 
-                
+                cargarInformacionMunicipios(direccion.getIdEstado());
+
                 int municipioIndex = buscarMunicipioInt(direccion.getIdMunicipio());
                 if (municipioIndex != -1) {
                     cbMunicipios.getSelectionModel().select(municipioIndex);
@@ -169,7 +191,7 @@ public class FXMLFormularioDireccionController implements Initializable {
     private int buscarMunicipioInt(int idMunicipio) {
         for (int i = 0; i < municipios.size(); i++) {
             if (municipios.get(i).getIdMunicipio() == idMunicipio) {
-                return i; 
+                return i;
             }
         }
         return 0;
@@ -178,10 +200,10 @@ public class FXMLFormularioDireccionController implements Initializable {
     private int buscarEstado(int idEstado) {
         for (int i = 0; i < estados.size(); i++) {
             if (estados.get(i).getIdEstado() == idEstado) {
-                return i; 
+                return i;
             }
         }
-        return 0; 
+        return 0;
     }
 
     private void limpiarCamposError() {
@@ -195,27 +217,54 @@ public class FXMLFormularioDireccionController implements Initializable {
 
     private boolean validarCampos() {
         boolean valido = false;
-        limpiarCamposError();
-        if (direccionEdicion.getCalle().isEmpty() || direccionEdicion.getCalle().length() > 100) {
-            lbErrorCalle.setText("campo no valido");
+
+        // Validación de campos de texto
+        if (tfCalle.getText() == null || tfCalle.getText().isEmpty()) {
+            lbErrorCalle.setText("La calle no puede estar vacía.");
             valido = true;
         }
-        if (direccionEdicion.getCodigoPostal().isEmpty() || direccionEdicion.getCodigoPostal().length() > 5) {
-            lbErrorCodigoPostal.setText("campo no valido");
+
+        if (tfCodigoPostal.getText() == null || !tfCodigoPostal.getText().matches("\\d{5}")) {
+            lbErrorCodigoPostal.setText("Código Postal debe contener exactamente 5 números.");
+            valido = true;
+        } else {
+            try {
+                Integer.parseInt(tfCodigoPostal.getText());  // Asegura que sea un entero válido
+            } catch (NumberFormatException e) {
+                lbErrorCodigoPostal.setText("Código Postal debe ser un número válido.");
+                valido = true;
+            }
+        }
+
+        if (tfNumero.getText() == null || tfNumero.getText().isEmpty()) {
+            lbErrorNumero.setText("El número no puede estar vacío.");
+            valido = true;
+        } else {
+            try {
+                Integer.parseInt(tfNumero.getText());  // Asegura que el número sea válido
+            } catch (NumberFormatException e) {
+                lbErrorNumero.setText("El número debe ser un valor entero.");
+                valido = true;
+            }
+        }
+
+        if (tfColonia.getText() == null || tfColonia.getText().isEmpty()) {
+            lbErrorColonia.setText("La colonia no puede estar vacía.");
             valido = true;
         }
-        if (direccionEdicion.getColonia() == null || direccionEdicion.getColonia().length() > 100) {
-            lbErrorColonia.setText("campo no valido");
+
+        // Validación de ComboBox
+        if (cbMunicipios.getSelectionModel().isEmpty()) {
+            lbErrorMunicipio.setText("Debe seleccionar un municipio.");
             valido = true;
         }
-        if (direccionEdicion.getNumero().isEmpty() || direccionEdicion.getNumero().length() > 10) {
-            lbErrorNumero.setText("campo no valido");
+
+        if (cbEstados.getSelectionModel().isEmpty()) {
+            lbErrorEstado.setText("Debe seleccionar un cliente.");
             valido = true;
         }
-        if (direccionEdicion.getIdMunicipio() == null || direccionEdicion.getIdMunicipio() <= 0) {
-            lbErrorMunicipio.setText("campo no valido");
-            valido = true;
-        }
+
+        // Devuelve `false` si todos los campos son correctos
         return valido;
     }
 
@@ -234,66 +283,73 @@ public class FXMLFormularioDireccionController implements Initializable {
         base.close();
     }
 
-    private void registrarDireccion(Direccion direccion) {
-        Mensaje msj = new Mensaje();
+    private void registrarDireccionCliente(Direccion direccion) {
+        Mensaje msj = DireccionesDAO.insertarDireccionCliente(direccion);
+        System.out.println(msj.isError());
+        procesarMensaje(msj, "La dirección se ha registrado con éxito");
+    }
 
+    private void registrarDireccionDestino(Direccion direccion) {
+        Mensaje msj = DireccionesDAO.insertarDireccionDestino(direccion);
+        System.out.println(msj.isError());
+        procesarMensaje(msj, "La dirección se ha registrado con éxito");
+    }
+
+    private void registrarDireccionOrigen(Direccion direccion) {
+        Mensaje msj = DireccionesDAO.insertarDireccionOrigen(direccion);
+        System.out.println(msj.isError());
+        procesarMensaje(msj, "La dirección se ha registrado con éxito");
+    }
+
+    private void registrarDireccion(Direccion direccion) {
         if (direccionEdicion.getIdCliente() != null) {
-            msj = DireccionesDAO.insertarDireccionCliente(direccion);
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "La direccion se ha regiustrado con exito", "Registro exitoso");
-                cerrarVentana();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al registrar");
-            }
+            registrarDireccionCliente(direccion);
         }
         if (direccionEdicion.getIdEnvioDestino() != null) {
-            msj = DireccionesDAO.insertarDireccionDestino(direccion);
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "La direccion se ha regiustrado con exito", "Registro exitoso");
-                cerrarVentana();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al registrar");
-            }
+            registrarDireccionDestino(direccion);
         }
         if (direccionEdicion.getIdEnvioOrigen() != null) {
-            msj = DireccionesDAO.insertarDireccionOrigen(direccion);
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "La direccion se ha regiustrado con exito", "Registro exitoso");
-                cerrarVentana();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al registrar");
-            }
+            registrarDireccionOrigen(direccion);
         }
+    }
+
+    private void editarDireccionCliente(Direccion direccion) {
+        Mensaje msj = DireccionesDAO.editarDireccionCliente(direccion);
+        procesarMensaje(msj, "La dirección se ha editado con éxito");
+    }
+
+    private void editarDireccionDestino(Direccion direccion) {
+        Mensaje msj = DireccionesDAO.editarDireccionDestino(direccion);
+        procesarMensaje(msj, "La dirección se ha editado con éxito");
+    }
+
+    private void editarDireccionOrigen(Direccion direccion) {
+        Mensaje msj = DireccionesDAO.editarDireccionOrigen(direccion);
+        procesarMensaje(msj, "La dirección se ha editado con éxito");
     }
 
     private void editarDireccion(Direccion direccion) {
-        Mensaje msj = new Mensaje();
         if (direccionEdicion.getIdCliente() != null) {
-            msj = DireccionesDAO.editarDireccionCliente(direccion);
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Ladireccion se ha editado con exito", "Edicion exitosa");
-                cerrarVentana();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al actualizar");
-            }
+            editarDireccionCliente(direccion);
         }
         if (direccionEdicion.getIdEnvioDestino() != null) {
-            msj = DireccionesDAO.editarDireccionDestino(direccion);
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Ladireccion se ha editado con exito", "Edicion exitosa");
-                cerrarVentana();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al actualizar");
-            }
+            editarDireccionDestino(direccion);
+
         }
         if (direccionEdicion.getIdEnvioOrigen() != null) {
-            msj = DireccionesDAO.editarDireccionOrigen(direccion);
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Ladireccion se ha editado con exito", "Edicion exitosa");
-                cerrarVentana();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al actualizar");
-            }
+            editarDireccionOrigen(direccion);
+
         }
     }
+
+    private void procesarMensaje(Mensaje msj, String mensajeExitoso) {
+        if (!msj.isError()) {
+            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, msj.getContenido(), "Operación exitosa");
+            System.err.println(msj.getContenido());
+            cerrarVentana();
+        } else {
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al registrar/editar");
+        }
+    }
+
 }

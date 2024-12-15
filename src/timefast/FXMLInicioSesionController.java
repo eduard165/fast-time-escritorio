@@ -83,7 +83,7 @@ public class FXMLInicioSesionController implements Initializable {
             Parent root = loader.load();
             FXMLMenuPrincipalController controlador = loader.getController();
             controlador.inicializarValores(colaborador);
-            
+
             Stage escenarioBase = (Stage) lbErrorPassword.getScene().getWindow();
             Scene escenaPrincipal = new Scene(root);
             escenarioBase.setScene(escenaPrincipal);
@@ -96,13 +96,16 @@ public class FXMLInicioSesionController implements Initializable {
 
     private void verificarCredencialesSistema(String numeroPersonal, String password) {
         RespuestaColaborador respuestaLogin = LoginDAO.iniciarSesion(numeroPersonal, password);
-
-        if (respuestaLogin.isError() == false) {
-            colaborador = respuestaLogin.getColaborador();
-            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Bienvenido(a) al sistema de GymForte", "Time Fast");
-            irPantallaPrincipal();
+        if (respuestaLogin.getColaborador().getIdRol() != 3) {
+            if (respuestaLogin.isError() == false) {
+                colaborador = respuestaLogin.getColaborador();
+                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Bienvenido(a) al sistema de GymForte", "Time Fast");
+                irPantallaPrincipal();
+            } else {
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, respuestaLogin.getContenido(), "Error");
+            }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, respuestaLogin.getContenido(), "Error");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Usuario no valido.", "Error");
         }
     }
 

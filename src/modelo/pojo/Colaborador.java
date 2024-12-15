@@ -126,5 +126,10 @@ public class Colaborador {
     public void setFotoBase64(String fotoBase64) {
         this.fotoBase64 = fotoBase64;
     }
+
+    @Override
+    public String toString() {
+        return  numeroPersonal ;
+    }
     
 }

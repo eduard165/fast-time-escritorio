@@ -1,4 +1,3 @@
-
 package modelo.dao;
 
 import com.google.gson.Gson;
@@ -109,6 +108,22 @@ public class ColaboradorDAO {
         return respuesta;
     }
 
+    public static Colaborador obtenerColaborador(int idColaborador) {
+        Colaborador colaborador = null;
+        String url = Constantes.URL_WS + "colaboradores/obtener-colaborador/" + idColaborador;
+        RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+
+                colaborador = gson.fromJson(respuesta.getContenido(), Colaborador.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return colaborador;
+    }
+
     public static List<Colaborador> obtenerColaboradores() {
         List<Colaborador> colaboradores = null;
         String url = Constantes.URL_WS + "colaboradores/obtenerTodos";
@@ -119,6 +134,24 @@ public class ColaboradorDAO {
                 Type tipoListaColaborador = new TypeToken<List<Colaborador>>() {
                 }.getType();
                 colaboradores = gson.fromJson(respuesta.getContenido(), tipoListaColaborador);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return colaboradores;
+    }
+
+    public static List<Colaborador> obtenerConductores() {
+        List<Colaborador> colaboradores = null;
+        String url = Constantes.URL_WS + "colaboradores/obtenerConductores";
+        RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                Type tipoListaColaborador = new TypeToken<List<Colaborador>>() {
+                }.getType();
+                colaboradores = gson.fromJson(respuesta.getContenido(), tipoListaColaborador);
+                System.out.println("");
             } catch (Exception e) {
                 e.printStackTrace();
             }

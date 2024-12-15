@@ -18,18 +18,12 @@ public class Cliente {
     private String telefono;
     private String correoElectronico;
     private String password;
-    private Integer idDireccion;
-    private String calle;
-    private String numero;
-    private String colonia;
-    private String codigoPostal;
-    private String cidad;
-    private String estado;
-
+    private String municipio;
+    
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correoElectronico, String password, Integer idDireccion, String calle, String numero, String colonia, String codigoPostal, String cidad, String estado) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correoElectronico, String password, String municipio) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -37,32 +31,17 @@ public class Cliente {
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
         this.password = password;
-        this.idDireccion = idDireccion;
-        this.calle = calle;
-        this.numero = numero;
-        this.colonia = colonia;
-        this.codigoPostal = codigoPostal;
-        this.cidad = cidad;
-        this.estado = estado;
+        this.municipio = municipio;
     }
 
-    public String getCidad() {
-        return cidad;
+    public String getMunicipio() {
+        return municipio;
     }
 
-    public void setCidad(String cidad) {
-        this.cidad = cidad;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
     }
     
-   
     public Integer getIdCliente() {
         return idCliente;
     }
@@ -119,44 +98,9 @@ public class Cliente {
         this.password = password;
     }
 
-    public Integer getIdDireccion() {
-        return idDireccion;
-    }
-
-    public void setIdDireccion(Integer idDireccion) {
-        this.idDireccion = idDireccion;
-    }
-
-    public String getCalle() {
-        return calle;
-    }
-
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getColonia() {
-        return colonia;
-    }
-
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
-    }
-
-    public String getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
+    @Override
+    public String toString() {
+        return  nombre + " " + apellidoPaterno + " " + apellidoMaterno;
     }
 
 }

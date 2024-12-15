@@ -26,8 +26,9 @@
                   <TableColumn fx:id="colNombre" prefWidth="116.0" text="Nombre" />
                   <TableColumn fx:id="colApellidoPaterno" prefWidth="165.0" text="Apellido Paterno" />
                   <TableColumn fx:id="colApellidoMaterno" prefWidth="192.0" text="Apellido Materno" />
-                  <TableColumn fx:id="colCorreoElectronico" minWidth="5.0" prefWidth="191.0" text="Correo Electronico" />
-                  <TableColumn fx:id="colTelefono" prefWidth="203.0" text="Telefono" />
+                  <TableColumn fx:id="colCorreoElectronico" minWidth="5.0" prefWidth="183.0" text="Correo Electronico" />
+                  <TableColumn fx:id="colTelefono" prefWidth="99.0" text="Telefono" />
+                  <TableColumn fx:id="colDireccion" prefWidth="111.0" text="Direccion" />
                </columns>
             </TableView>
             <Button layoutX="434.0" layoutY="116.0" mnemonicParsing="false" onAction="#agregarDireccion" prefHeight="31.0" prefWidth="178.0" text="Agregar Direccion" />

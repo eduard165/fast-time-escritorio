@@ -34,6 +34,7 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
     private FilteredList<Cliente> listaFiltrada;
     private Cliente cliente;
     private TextField txfBuscador;
+
     @FXML
     private TableView<Cliente> tbClientes;
     @FXML
@@ -46,6 +47,8 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
     private TableColumn colCorreoElectronico;
     @FXML
     private TableColumn colTelefono;
+    @FXML
+    private TableColumn colDireccion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -109,7 +112,7 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioDireccion.fxml"));
                 Parent root = loader.load();
                 FXMLFormularioDireccionController controlador = loader.getController();
-                controlador.incializarValoresCliente(cliente.getIdCliente(),0,0);
+                controlador.incializarValoresCliente(this, cliente.getIdCliente(),null,null);
 
                 Stage escenarioAdministrador = new Stage();
                 Scene scene = new Scene(root);
@@ -132,10 +135,10 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
         colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         colTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         colCorreoElectronico.setCellValueFactory(new PropertyValueFactory("correoElectronico"));
+        colDireccion.setCellValueFactory(new PropertyValueFactory("municipio"));
     }
 
     private void cargarInformacionTabla() {
-
         OLclientes = FXCollections.observableArrayList();
         List<Cliente> listaWS = ClienteDAO.obtenerClientes();
         OLclientes.addAll(listaWS);

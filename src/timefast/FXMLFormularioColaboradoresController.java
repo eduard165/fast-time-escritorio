@@ -172,7 +172,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             tiposColaboradores = FXCollections.observableArrayList(roles);
             cbRol.setItems(tiposColaboradores);
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al cargar", "Hubo un error al momento de cargar los roles, intentelo nuevamente");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al momento de cargar los roles, intentelo nuevamente", "Error al cargar");
         }
     }
 
