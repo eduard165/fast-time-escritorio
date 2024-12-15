@@ -57,6 +57,7 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarInformacionTabla();
+
         listaFiltrada = new FilteredList<>(OLenvios, p -> true);
         tblGestionEnvios.setItems(listaFiltrada);
     }
@@ -153,10 +154,8 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
                 FXMLFormularioAsignarConductorController controlador = loader.getController();
                 if (envio.getIdColaborador() == null) {
                     controlador.inicializarValores(this, envio, false);
-
                 } else {
                     controlador.inicializarValores(this, envio, true);
-
                 }
                 Stage escenarioAdministrador = new Stage();
                 Scene scene = new Scene(root);

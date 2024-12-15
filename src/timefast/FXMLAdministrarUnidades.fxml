@@ -23,19 +23,20 @@
                   <TableColumn fx:id="colAnio" minWidth="0.0" text="Año" />
                   <TableColumn fx:id="colVIN" prefWidth="117.0" text="VIN" />
                   <TableColumn fx:id="colNumeroInterno" prefWidth="125.0" text="Numero Interno" />
-                  <TableColumn fx:id="colTipo" prefWidth="148.0" text="Tipo" />
-                  <TableColumn fx:id="colConductor" prefWidth="152.0" text="Conductor" />
+                  <TableColumn fx:id="colTipo" prefWidth="151.0" text="Tipo" />
+                  <TableColumn fx:id="colConductor" prefWidth="149.0" text="Conductor" />
                </columns>
             </TableView>
-            <Button layoutX="75.0" layoutY="169.0" mnemonicParsing="false" onAction="#Agregar" prefHeight="31.0" prefWidth="196.0" text="Agregar" />
-            <Button layoutX="340.0" layoutY="169.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="196.0" text="Editar" />
-            <Button layoutX="607.0" layoutY="169.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="196.0" text="Eliminar" />
-            <TextField layoutX="269.0" layoutY="237.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="338.0" text="Busqueda filtrada" />
+            <Button layoutX="14.0" layoutY="169.0" mnemonicParsing="false" onAction="#Agregar" prefHeight="31.0" prefWidth="196.0" text="Agregar" />
+            <Button layoutX="227.0" layoutY="169.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="196.0" text="Editar" />
+            <Button layoutX="438.0" layoutY="169.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="196.0" text="Eliminar" />
+            <TextField fx:id="tfBuscar" alignment="CENTER" layoutX="269.0" layoutY="237.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="338.0" promptText="Buscar" />
             <Label layoutX="287.0" layoutY="74.0" text="Gestiona las unidades de Time -Fast">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <Button layoutX="644.0" layoutY="169.0" mnemonicParsing="false" onAction="#asignarConductor" prefHeight="31.0" prefWidth="196.0" text="Asignar Conductor" />
          </children>
       </Pane>
    </children>

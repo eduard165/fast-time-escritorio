@@ -56,7 +56,22 @@ public class FXMLInicioSesionController implements Initializable {
         String numeroPersonal = tfNumeroPersonal.getText();
         String password = tfPassword.getText();
         if (validarCampos(numeroPersonal, password)) {
-            verificarCredencialesSistema(numeroPersonal, password);
+            RespuestaColaborador respuestaLogin = LoginDAO.iniciarSesion(numeroPersonal, password);
+            if (respuestaLogin.getColaborador() != null) {
+                if (respuestaLogin.getColaborador().getIdRol() != 3) {
+                    if (respuestaLogin.isError() == false) {
+                        colaborador = respuestaLogin.getColaborador();
+                        Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Bienvenido(a) al sistema de GymForte", "Time Fast");
+                        irPantallaPrincipal();
+                    } else {
+                        Utilidades.AletaSimple(Alert.AlertType.ERROR, respuestaLogin.getContenido(), "Error");
+                    }
+                } else {
+                    Utilidades.AletaSimple(Alert.AlertType.ERROR, "Usuario no valido.", "Error");
+                }
+            }else {
+                    Utilidades.AletaSimple(Alert.AlertType.ERROR, "Usuario no encontrado", "Error");
+                }
         }
     }
 

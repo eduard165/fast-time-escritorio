@@ -19,11 +19,12 @@ public class Unidad {
     private Integer idTipoUnidad;
     private String numeroInterno;
     private String nombreTipo;
+    private String nombreColaboradorCompleto;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String marca, String modelo, Integer anio, String VIN, Integer idTipoUnidad, String numeroInterno, String nombreTipo) {
+    public Unidad(Integer idUnidad, String marca, String modelo, Integer anio, String VIN, Integer idTipoUnidad, String numeroInterno, String nombreTipo, String nombreColaboradorCompleto) {
         this.idUnidad = idUnidad;
         this.marca = marca;
         this.modelo = modelo;
@@ -32,6 +33,15 @@ public class Unidad {
         this.idTipoUnidad = idTipoUnidad;
         this.numeroInterno = numeroInterno;
         this.nombreTipo = nombreTipo;
+        this.nombreColaboradorCompleto = nombreColaboradorCompleto;
+    }
+
+    public String getNombreColaboradorCompleto() {
+        return nombreColaboradorCompleto;
+    }
+
+    public void setNombreColaboradorCompleto(String nombreColaboradorCompleto) {
+        this.nombreColaboradorCompleto = nombreColaboradorCompleto;
     }
 
     public Integer getIdUnidad() {
@@ -97,4 +107,10 @@ public class Unidad {
     public void setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
     }
+
+    @Override
+    public String toString() {
+        return  numeroInterno ;
+    }
+    
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="283.0" prefWidth="238.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLAsignarConductorController">
+   <children>
+      <Pane layoutX="-3.0" layoutY="-3.0" prefHeight="304.0" prefWidth="240.0" style="-fx-background-color: beige;">
+         <children>
+            <ComboBox fx:id="cbConductores" layoutX="45.0" layoutY="143.0" prefWidth="150.0" />
+            <Label layoutX="78.0" layoutY="111.0" text="Conductores" />
+            <Button layoutX="83.0" layoutY="239.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+            <Label layoutX="102.0" layoutY="25.0" text="Label" />
+            <Label fx:id="lbErrorConductores" layoutX="45.0" layoutY="174.0" prefHeight="31.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

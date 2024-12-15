@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.util.List;
 import modelo.ConexionHTTP;
+import modelo.pojo.Asignacion;
 import modelo.pojo.Mensaje;
 import modelo.pojo.respuestasPojos.RespuestaHTTP;
 import modelo.pojo.Unidad;
@@ -87,7 +88,8 @@ public class UnidadesDAO {
         if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();
             try {
-                Type tipoListaUnidad = new TypeToken<List<TipoUnidad>>() {}.getType();
+                Type tipoListaUnidad = new TypeToken<List<TipoUnidad>>() {
+                }.getType();
                 tiposUnidades = gson.fromJson(respuestaWS.getContenido(), tipoListaUnidad);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -95,4 +97,24 @@ public class UnidadesDAO {
         }
         return tiposUnidades;
     }
+
+    public static List<Unidad> obtenerUnidades() {
+        List<Unidad> unidades = null;
+        String urlServicio = Constantes.URL_WS + "unidades/obtenerTodos";
+        RespuestaHTTP respuestaWS = ConexionHTTP.peticionGET(urlServicio);
+
+        if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                Type tipoListaUnidad = new TypeToken<List<Unidad>>() {
+                }.getType();
+                unidades = gson.fromJson(respuestaWS.getContenido(), tipoListaUnidad);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return unidades;
+    }
+
+    
 }

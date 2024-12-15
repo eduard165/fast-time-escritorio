@@ -242,7 +242,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     private void guardarDatos(Colaborador colaborador) {
         Mensaje mjs = ColaboradorDAO.registrarColaborador(colaborador);
         if (!mjs.isError()) {
-            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Registro exitoso", "El colaborador se ha registrado con exito");
+            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha registrado con exito", "Registro exitoso");
             cerrarVentana();
             observador.notificacionOperacion("Nuevo registro", colaborador.getNombre());
         } else {

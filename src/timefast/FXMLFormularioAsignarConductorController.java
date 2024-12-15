@@ -47,10 +47,11 @@ public class FXMLFormularioAsignarConductorController implements Initializable {
             Mensaje msj = EnviosDAO.asignarConductor(envioEnviado.getIdEnvio(), envioEnviado.getIdColaborador());
             if (!msj.isError()) {
                 Utilidades.AletaSimple(Alert.AlertType.INFORMATION, msj.getContenido(), "Operación exitosa");
-                observador.notificacionOperacion("", "");
+                observador.notificacionOperacion(" ", "");
                 cerrarVentana();
             } else {
                 Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error");
+                cerrarVentana();
             }
         } else {
             Utilidades.AletaSimple(Alert.AlertType.ERROR, "CAMPOS NO VALIDOS", "ERROR");

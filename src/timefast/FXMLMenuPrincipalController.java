@@ -51,16 +51,17 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void cerrarSesion(MouseEvent event) {
-        Utilidades.AletaSimple(Alert.AlertType.CONFIRMATION, "Cierre de sesion", "Esperamos regreses pronto");
-        try {
-            Stage escenarioBase = (Stage) lbInformacionColaboradorEnSesion.getScene().getWindow();
+        Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Esperemos que vuelva pronto", "Cierre sesión");
 
-            Parent principal = FXMLLoader.load(getClass().getResource("FXMLInisioSesion.fxml"));
-            Scene escenaPrincipal = new Scene(principal);
-            escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("Inisio de sesion");
+        try {
+            Stage stage = (Stage) lbInformacionColaboradorEnSesion.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("FXMLInicioSesion.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Inicio de Sesión");
         } catch (IOException ex) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, ex + "/n error al cambiar", "Error al cambiar de pantalla");
+            ex.printStackTrace();
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Ocurrió un error al cerrar sesión, intente de nuevo", "Error");
         }
     }
 
@@ -100,7 +101,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             escenarioAdministrador.showAndWait();
         } catch (IOException ex) {
             ex.printStackTrace();
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Lo sentimos ocurrio un error inesperado, intentalo nuevamente", "Error" );
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Lo sentimos ocurrio un error inesperado, intentalo nuevamente", "Error");
         }
     }
 
