@@ -59,7 +59,6 @@ public class FXMLAsignarConductorController implements Initializable {
                     cerrarVentana();
                 }
             } else {
-                System.out.println("Estoy aqui");
                 Mensaje msj = AsignacionesDAO.registrarAsignacion(cargarCampor());
                 if (!msj.isError()) {
                     Utilidades.AletaSimple(Alert.AlertType.INFORMATION, msj.getContenido(), "Operación exitosa");
@@ -71,8 +70,7 @@ public class FXMLAsignarConductorController implements Initializable {
                 }
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "CAMPOS NO VALIDOS", "ERROR");
-
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion", "ERROR");
         }
     }
 
@@ -89,36 +87,27 @@ public class FXMLAsignarConductorController implements Initializable {
 
     private Asignacion cargarCampor() {
         Asignacion nueva = new Asignacion();
-
         Colaborador seleccionado = cbConductores.getSelectionModel().getSelectedItem();
-
         if (seleccionado == null) {
             Utilidades.AletaSimple(Alert.AlertType.ERROR, "¡Por favor selecciona un conductor!", "Error al guardar");
             return null;
         }
-
         nueva.setIdColaborador(seleccionado.getIdColaborador());
         nueva.setIdUnidad(unidad.getIdUnidad());
-
         if (isEditable && nuevaAsignacion != null) {
             nueva.setIdAsignacion(nuevaAsignacion.getIdAsignacion());
         }
-
         return nueva;
     }
 
     private void cargarColaboradores() {
-        try {
-            List<Colaborador> colab = ColaboradorDAO.obtenerConductores();
 
-            if (colab != null && !colab.isEmpty()) {
-                this.tiposColaboradore = FXCollections.observableArrayList(colab);
-                cbConductores.setItems(this.tiposColaboradore);
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al momento de cargar los colaboradores, inténtelo nuevamente.", "Error al cargar");
-            }
-        } catch (Exception e) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Ocurrió un error al cargar los colaboradores: " + e.getMessage(), "Error");
+        List<Colaborador> colab = ColaboradorDAO.obtenerConductores();
+        if (colab != null && !colab.isEmpty()) {
+            this.tiposColaboradore = FXCollections.observableArrayList(colab);
+            cbConductores.setItems(this.tiposColaboradore);
+        } else {
+            cerrarVentana();
         }
     }
 
@@ -129,14 +118,6 @@ public class FXMLAsignarConductorController implements Initializable {
             }
         }
         return 0;
-    }
-
-    private void guardarAsignacionNueva() {
-
-    }
-
-    private void actualizar() {
-
     }
 
     private boolean validarComboBox() {

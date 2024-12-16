@@ -114,27 +114,27 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
     private void asignarConductor(ActionEvent event) {
         Unidad unidad = tbUnidades.getSelectionModel().getSelectedItem();
         if (unidad != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAsignarConductor.fxml"));
-                Parent root = loader.load();
-                FXMLAsignarConductorController controlador = loader.getController();
-                if (unidad.getNombreColaboradorCompleto().equals("Sin asignar")) {
-                    controlador.inicializarValores(this, unidad, false);
-                } else {
-                    controlador.inicializarValores(this, unidad, true);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAsignarConductor.fxml"));
+                    Parent root = loader.load();
+                    FXMLAsignarConductorController controlador = loader.getController();
+                    if (unidad.getNombreColaboradorCompleto().equals("Sin asignar")) {
+                        controlador.inicializarValores(this, unidad, false);
+                    } else {
+                        controlador.inicializarValores(this, unidad, true);
+                    }
+                    Stage escenarioAdministrador = new Stage();
+                    Scene scene = new Scene(root);
+                    escenarioAdministrador.setScene(scene);
+                    escenarioAdministrador.setTitle("Asignacion de conductor");
+                    escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
+                    escenarioAdministrador.showAndWait();
+                } catch (Exception e) {
+                    Utilidades.AletaSimple(Alert.AlertType.WARNING, "No existen conductores para asinar", "Error");
                 }
-                Stage escenarioAdministrador = new Stage();
-                Scene scene = new Scene(root);
-                escenarioAdministrador.setScene(scene);
-                escenarioAdministrador.setTitle("Formulario de colaboradores");
-                escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
-                escenarioAdministrador.showAndWait();
-            } catch (Exception e) {
-                e.printStackTrace();
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, e.getMessage(), "EROR");
-            }
+     
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Seleccione un elemento en la tabla para continuar", "Error");
 
         }
     }
@@ -166,7 +166,7 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
             Stage escenarioAdministrador = new Stage();
             Scene scene = new Scene(root);
             escenarioAdministrador.setScene(scene);
-            escenarioAdministrador.setTitle("Formulario de colaboradores");
+            escenarioAdministrador.setTitle("Formulario de Unidades");
             escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
             escenarioAdministrador.showAndWait();
         } catch (Exception e) {

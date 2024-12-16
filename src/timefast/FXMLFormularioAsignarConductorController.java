@@ -1,4 +1,3 @@
-
 package timefast;
 
 import java.net.URL;
@@ -17,7 +16,6 @@ import modelo.dao.ColaboradorDAO;
 import modelo.dao.EnviosDAO;
 import modelo.pojo.Colaborador;
 import modelo.pojo.Envio;
-import modelo.pojo.EstadoEnvio;
 import modelo.pojo.Mensaje;
 import observador.NotificadorOperaciones;
 import utils.Utilidades;
@@ -54,7 +52,7 @@ public class FXMLFormularioAsignarConductorController implements Initializable {
                 cerrarVentana();
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "CAMPOS NO VALIDOS", "ERROR");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion", "ERROR");
 
         }
 
@@ -71,18 +69,14 @@ public class FXMLFormularioAsignarConductorController implements Initializable {
     }
 
     private void cargarColaboradores() {
-        try {
-            List<Colaborador> colab = ColaboradorDAO.obtenerConductores();
-           
-            if (colab != null && !colab.isEmpty()) {
-                this.tiposColaboradore = FXCollections.observableArrayList(colab);
-                cbOpciones.setItems(this.tiposColaboradore);
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al momento de cargar los colaboradores, inténtelo nuevamente.", "Error al cargar");
-            }
-        } catch (Exception e) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Ocurrió un error al cargar los colaboradores: " + e.getMessage(), "Error");
+        List<Colaborador> colab = ColaboradorDAO.obtenerConductores();
+        if (colab != null && !colab.isEmpty()) {
+            this.tiposColaboradore = FXCollections.observableArrayList(colab);
+            cbOpciones.setItems(this.tiposColaboradore);
+        } else {
+            cerrarVentana();
         }
+
     }
 
     private int buscarColaborador(int idColaborador) {
@@ -98,7 +92,7 @@ public class FXMLFormularioAsignarConductorController implements Initializable {
         boolean esValido = true;
 
         if (cbOpciones.getSelectionModel().getSelectedItem() == null) {
-            lbErrorSeleccion.setText("Debe seleccionar un colaborador.");
+            lbErrorSeleccion.setText("Debe seleccionar un conductor");
             esValido = false;
         }
         return esValido;

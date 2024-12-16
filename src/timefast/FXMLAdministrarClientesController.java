@@ -21,10 +21,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.dao.ClienteDAO;
-import modelo.dao.DireccionesDAO;
 import modelo.pojo.Cliente;
 import modelo.pojo.Mensaje;
-import modelo.pojo.respuestasPojos.RespuestaDireccion;
 import observador.NotificadorOperaciones;
 import utils.Utilidades;
 
@@ -93,7 +91,7 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
         if (this.cliente != null) {
             Mensaje mjs = ClienteDAO.eliminarCliente(cliente.getIdCliente());
             if (!mjs.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha eliminado con exito", "Eliminacion exitosa");
+                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El cliente se ha eliminado con exito", "Eliminacion exitosa");
                 cargarInformacionTabla();
             } else {
                 Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
@@ -106,13 +104,13 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
     @FXML
     private void agregarDireccion(ActionEvent event) {
         this.cliente = tbClientes.getSelectionModel().getSelectedItem();
-        
+
         if (this.cliente != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioDireccion.fxml"));
                 Parent root = loader.load();
                 FXMLFormularioDireccionController controlador = loader.getController();
-                controlador.incializarValoresCliente(this, cliente.getIdCliente(),null,null);
+                controlador.incializarValoresCliente(this, cliente.getIdCliente(), null, null);
 
                 Stage escenarioAdministrador = new Stage();
                 Scene scene = new Scene(root);
@@ -122,7 +120,7 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
                 escenarioAdministrador.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
-                Utilidades.AletaSimple(Alert.AlertType.ERROR,e.getMessage() , "Error");
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, e.getMessage(), "Error");
             }
         } else {
             Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
@@ -155,11 +153,11 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
             Stage escenarioAdministrador = new Stage();
             Scene scene = new Scene(root);
             escenarioAdministrador.setScene(scene);
-            escenarioAdministrador.setTitle("Administrador de colaboradores");
+            escenarioAdministrador.setTitle("Formulario Cliente");
             escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
             escenarioAdministrador.showAndWait();
         } catch (Exception e) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error", e.getMessage());
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, e.getMessage(), "Error");
         }
     }
 

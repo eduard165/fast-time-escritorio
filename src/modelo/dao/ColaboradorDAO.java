@@ -108,6 +108,25 @@ public class ColaboradorDAO {
         return respuesta;
     }
 
+    public static Mensaje subirFotoColaboradorNuevo(String numeroPersonal, byte[] fotoBytes) {
+        Mensaje respuesta = new Mensaje();
+        String urlServicio = Constantes.URL_WS + "colaboradores/subir-foto-nuevo/" + numeroPersonal;
+        try {
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUTBytes(urlServicio, fotoBytes);
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                Gson gson = new Gson();
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido("Error al procesar la subida de la foto: " + e.getMessage());
+        }
+        return respuesta;
+    }
+
     public static Colaborador obtenerColaborador(int idColaborador) {
         Colaborador colaborador = null;
         String url = Constantes.URL_WS + "colaboradores/obtener-colaborador/" + idColaborador;

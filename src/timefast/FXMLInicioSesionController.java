@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timefast;
 
 import java.io.IOException;
@@ -15,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,11 +20,6 @@ import modelo.pojo.Colaborador;
 import modelo.pojo.respuestasPojos.RespuestaColaborador;
 import utils.Utilidades;
 
-/**
- * FXML Controller class
- *
- * @author kevin
- */
 public class FXMLInicioSesionController implements Initializable {
 
     @FXML
@@ -43,12 +33,9 @@ public class FXMLInicioSesionController implements Initializable {
 
     private Colaborador colaborador;
 
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     @FXML
@@ -61,7 +48,7 @@ public class FXMLInicioSesionController implements Initializable {
                 if (respuestaLogin.getColaborador().getIdRol() != 3) {
                     if (respuestaLogin.isError() == false) {
                         colaborador = respuestaLogin.getColaborador();
-                        Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Bienvenido(a) al sistema de GymForte", "Time Fast");
+                        Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Bienvenido(a) al sistema de FastTime", "Time Fast");
                         irPantallaPrincipal();
                     } else {
                         Utilidades.AletaSimple(Alert.AlertType.ERROR, respuestaLogin.getContenido(), "Error");
@@ -98,13 +85,12 @@ public class FXMLInicioSesionController implements Initializable {
             Parent root = loader.load();
             FXMLMenuPrincipalController controlador = loader.getController();
             controlador.inicializarValores(colaborador);
-
             Stage escenarioBase = (Stage) lbErrorPassword.getScene().getWindow();
             Scene escenaPrincipal = new Scene(root);
             escenarioBase.setScene(escenaPrincipal);
             escenarioBase.setTitle("Menu Principal");
         } catch (IOException ex) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, ex + "Error al cambiar de pantalla", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al cambiar de pantalla", "Error");
         }
 
     }

@@ -13,9 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import modelo.dao.ColaboradorDAO;
 import modelo.dao.UnidadesDAO;
-import modelo.pojo.Colaborador;
 import modelo.pojo.Mensaje;
 import modelo.pojo.TipoUnidad;
 import modelo.pojo.Unidad;
@@ -62,6 +60,7 @@ public class FXMLFormularioUnidadesController implements Initializable {
         if (validarDatos()) {
             Unidad unidadNueva = obtenerDatos();
             if(isEditable){
+                unidadNueva.setIdUnidad(unidad.getIdUnidad());
                 editar(unidadNueva);
             }else{
                 guardar(unidadNueva);
@@ -132,7 +131,6 @@ public class FXMLFormularioUnidadesController implements Initializable {
 
     private boolean validarDatos() {
         boolean validar = true;
-
         if (tfMarca.getText() == null || tfMarca.getText().trim().isEmpty()) {
             lbErrorMarca.setText("La marca es obligatoria.");
             validar = false;
@@ -146,7 +144,6 @@ public class FXMLFormularioUnidadesController implements Initializable {
         } else {
             lbErrorModelo.setText("");
         }
-
         try {
             String anioTexto = tfAnio.getText();
             if (anioTexto == null || anioTexto.trim().isEmpty()) {
@@ -165,7 +162,6 @@ public class FXMLFormularioUnidadesController implements Initializable {
             lbErrorAnio.setText("El año debe ser un número válido.");
             validar = false;
         }
-
         if (tfVIN.getText() == null || tfVIN.getText().trim().isEmpty()) {
             lbErrorVIN.setText("El VIN es obligatorio.");
             validar = false;
@@ -175,14 +171,12 @@ public class FXMLFormularioUnidadesController implements Initializable {
         } else {
             lbErrorVIN.setText("");
         }
-
         if (cbTipoUnidad.getSelectionModel().getSelectedItem() == null) {
             lbErrorTipoUnidad.setText("Debe seleccionar un tipo de unidad.");
             validar = false;
         } else {
             lbErrorTipoUnidad.setText("");
         }
-
         return validar;
     }
 
@@ -202,7 +196,6 @@ public class FXMLFormularioUnidadesController implements Initializable {
         unidadNueva.setIdTipoUnidad((cbTipoUnidad.getSelectionModel().getSelectedItem() != null)
                 ? cbTipoUnidad.getSelectionModel().getSelectedItem().getIdTipoUnidad()
                 : null);
-
         return unidadNueva;
     }
 

@@ -121,7 +121,7 @@
                </children></Pane>
             <ImageView fitHeight="75.0" fitWidth="156.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#regresar" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../media/cerrar-sesion.png" />
+                  <Image url="@../media/back.png" />
                </image>
             </ImageView>
          </children>

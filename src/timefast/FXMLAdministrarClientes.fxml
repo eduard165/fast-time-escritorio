@@ -11,7 +11,7 @@
    <children>
       <Pane prefHeight="679.0" prefWidth="868.0" style="-fx-background-color: teal;">
          <children>
-            <Label layoutX="268.0" layoutY="21.0" text="Modulo de Colaboradores">
+            <Label layoutX="268.0" layoutY="21.0" text="Modulo de Clientes">
                <font>
                   <Font size="25.0" />
                </font>

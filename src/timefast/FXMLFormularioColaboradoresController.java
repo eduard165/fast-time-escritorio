@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timefast;
 
 import javafx.scene.image.Image;
@@ -34,11 +29,6 @@ import modelo.pojo.Rol;
 import observador.NotificadorOperaciones;
 import utils.Utilidades;
 
-/**
- * FXML Controller class
- *
- * @author eduar
- */
 public class FXMLFormularioColaboradoresController implements Initializable {
 
     @FXML
@@ -95,16 +85,13 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             cargarDatosEdicion();
             cargarFotoEdicion();
         }
-
     }
 
     @FXML
     private void registrarColaborador(ActionEvent event) {
         Colaborador colaborador = new Colaborador();
         colaborador = obtenerDatos();
-        if (fotografia != null) {
-            subirFotoColaborador(fotografia);
-        }
+
         if (validarCampos(colaborador)) {
             if (isEditable) {
                 colaborador.setIdColaborador(this.colaboradorEdicion.getIdColaborador());
@@ -122,7 +109,6 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         fotografia = mostrarDialogoSeleccionado();
         if (fotografia != null) {
             mostrarImagen(fotografia);
-
         }
     }
 
@@ -132,16 +118,31 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             java.io.ByteArrayOutputStream byteArrayOutputStream = new java.io.ByteArrayOutputStream();
             ImageIO.write(buffer, "png", byteArrayOutputStream);
             byte[] fotoBytes = byteArrayOutputStream.toByteArray();
-
             Mensaje mensaje = ColaboradorDAO.subirFotoColaborador(isEditable ? colaboradorEdicion.getIdColaborador() : null, fotoBytes);
-
             if (!mensaje.isError()) {
                 mostrarImagen(foto);
             } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al subir la foto", mensaje.getContenido());
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, mensaje.getContenido(), "Error al subir la foto");
             }
         } catch (IOException e) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error", "Hubo un error al procesar la imagen seleccionada.");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al procesar la imagen seleccionada.", "Error");
+        }
+    }
+
+    private void subirFotoNuevoColaborador(File foto, Colaborador Ncolaborador) {
+        try {
+            BufferedImage buffer = ImageIO.read(foto);
+            java.io.ByteArrayOutputStream byteArrayOutputStream = new java.io.ByteArrayOutputStream();
+            ImageIO.write(buffer, "png", byteArrayOutputStream);
+            byte[] fotoBytes = byteArrayOutputStream.toByteArray();
+            Mensaje mensaje = ColaboradorDAO.subirFotoColaboradorNuevo(Ncolaborador.getNumeroPersonal(), fotoBytes);
+            if (!mensaje.isError()) {
+                mostrarImagen(foto);
+            } else {
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, mensaje.getContenido(), "Error al subir la foto");
+            }
+        } catch (IOException e) {
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al procesar la imagen seleccionada.", "Error");
         }
     }
 
@@ -185,7 +186,6 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         lbErrorContraseña.setText("");
         lbErrorRol.setText("");
         lbErrorNumeroPersonal.setText("");
-
     }
 
     private boolean validarCampos(Colaborador colaborador) {
@@ -193,69 +193,68 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         limpiarErrores();
 
         if (colaborador.getNombre().isEmpty() || colaborador.getNombre().length() > 50) {
-            lbErrorNombre.setText("El nombre debe tener hasta 50 caracteres.");
+            lbErrorNombre.setText("El nombre no valido");
             valido = false;
         }
-
         if (colaborador.getApellidoPaterno().isEmpty() || colaborador.getApellidoPaterno().length() > 50) {
-            lbErrorApellidoPaterno.setText("El apellido paterno debe tener hasta 50 caracteres.");
+            lbErrorApellidoPaterno.setText("El apellido paterno no valido");
             valido = false;
         }
-
         if (colaborador.getApellidoMaterno().isEmpty() || colaborador.getApellidoMaterno().length() > 50) {
-            lbErrorApellidoMaterno.setText("El apellido materno debe tener hasta 50 caracteres.");
+            lbErrorApellidoMaterno.setText("El apellido materno no valido");
             valido = false;
         }
-
         if (colaborador.getCURP().isEmpty() || colaborador.getCURP().length() > 18) {
-            lbErrorCURP.setText("El CURP debe tener hasta 18 caracteres.");
+            lbErrorCURP.setText("El CURP debe tener hasta 18 caracteres");
             valido = false;
         }
-
         if (colaborador.getCorreoElectronico().isEmpty()
                 || !colaborador.getCorreoElectronico().matches("^[^@]+@[^@]+\\.[a-zA-Z]{2,}$")) {
-            lbErrorCorreoElectronico.setText("Correo electrónico inválido.");
+            lbErrorCorreoElectronico.setText("Correo electrónico inválido");
             valido = false;
         }
-
         if (colaborador.getPassword().isEmpty()
                 || !colaborador.getPassword().matches("^[a-zA-Z0-9]{8,}$")) {
-            lbErrorContraseña.setText("La contraseña debe tener al menos 8 caracteres y solo letras y números.");
+            lbErrorContraseña.setText("La contraseña no valida");
             valido = false;
         }
-
         if (colaborador.getIdRol() == null || colaborador.getIdRol() <= 0) {
-            lbErrorRol.setText("El rol debe ser un valor válido.");
+            lbErrorRol.setText("El rol no valido");
             valido = false;
         }
-
         if (!isEditable) {
             if (colaborador.getNumeroPersonal().isEmpty() || colaborador.getNumeroPersonal().length() > 20) {
                 lbErrorNumeroPersonal.setText("El número personal debe tener hasta 20 caracteres.");
                 valido = false;
             }
         }
-
         return valido;
     }
 
     private void guardarDatos(Colaborador colaborador) {
         Mensaje mjs = ColaboradorDAO.registrarColaborador(colaborador);
+
         if (!mjs.isError()) {
+            if (fotografia != null) {
+                subirFotoNuevoColaborador(fotografia, colaborador);
+            }
             Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha registrado con exito", "Registro exitoso");
             cerrarVentana();
-            observador.notificacionOperacion("Nuevo registro", colaborador.getNombre());
+            observador.notificacionOperacion("", "");
         } else {
             Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al guardar");
         }
     }
 
     private void editarDatosColaborador(Colaborador colaborador) {
+        if (fotografia != null) {
+            subirFotoColaborador(fotografia);
+        }
         Mensaje mjs = ColaboradorDAO.editarColaborador(colaborador);
         if (!mjs.isError()) {
             Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha editado con exito", "Edicion exitosa");
             cerrarVentana();
-            observador.notificacionOperacion("Nueva edicion", colaborador.getNombre());
+            observador.notificacionOperacion("", "");
         } else {
             Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al guardar");
         }
@@ -297,7 +296,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             Image image = SwingFXUtils.toFXImage(buffer, null);
             imFoto.setImage(image);
         } catch (IOException e) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "ERROR", "Hubo un error al mostrar la foto");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al mostrar la foto", "ERROR");
         }
     }
 
@@ -315,9 +314,9 @@ public class FXMLFormularioColaboradoresController implements Initializable {
                     imFoto.setImage(image);
 
                 } catch (IllegalArgumentException e) {
-                    Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al cargar la imagen", "La cadena Base64 es inválida.");
+                    Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al cargar la imagen", "Error");
                 } catch (IOException e) {
-                    Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al mostrar la imagen", "Hubo un error al procesar la imagen.");
+                    Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al mostrar la imagen", "Error");
                 }
             }
         }

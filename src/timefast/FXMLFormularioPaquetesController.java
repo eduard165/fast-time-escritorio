@@ -82,7 +82,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             this.guias = FXCollections.observableArrayList(guia);
             cbNumeroGuia.setItems(guias);
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Error al cargar", "Hubo un error al momento de cargar los roles, intentelo nuevamente");
+            cerrarVentana();
         }
     }
 

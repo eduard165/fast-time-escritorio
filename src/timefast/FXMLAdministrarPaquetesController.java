@@ -21,7 +21,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.dao.PaquetesDAO;
-import modelo.pojo.Colaborador;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Paquete;
 import observador.NotificadorOperaciones;
@@ -41,13 +40,13 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
     private TableColumn colProfundidad;
     @FXML
     private TableView<Paquete> tbPaqutes;
-
-    private ObservableList<Paquete> OLpaquetes;
-    private FilteredList<Paquete> listaFiltrada;
     @FXML
     private TextField tfBuscar;
     @FXML
-    private TableColumn<?, ?> colNumeroGuia;
+    private TableColumn colNumeroGuia;
+
+    private ObservableList<Paquete> OLpaquetes;
+    private FilteredList<Paquete> listaFiltrada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,7 +58,21 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
 
     @FXML
     private void Agregar(ActionEvent event) {
-        irFormulario(this, null);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioPaquetes.fxml"));
+            Parent root = loader.load();
+            FXMLFormularioPaquetesController controlador = loader.getController();
+            controlador.inicializarValores(this, null);
+
+            Stage escenarioAdministrador = new Stage();
+            Scene scene = new Scene(root);
+            escenarioAdministrador.setScene(scene);
+            escenarioAdministrador.setTitle("Formulario Paquete");
+            escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
+            escenarioAdministrador.showAndWait();
+        } catch (Exception e) {
+            Utilidades.AletaSimple(Alert.AlertType.WARNING,"No hay envios registrados" , "EROR");
+        }
     }
 
     @FXML
@@ -69,8 +82,7 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
         if (paquete != null) {
             irFormulario(this, paquete);
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
-
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -86,7 +98,7 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
                 Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -97,13 +109,11 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
             if (textoBusqueda == null || textoBusqueda.isEmpty()) {
                 return true;
             }
-
             return p.getNumeroGuia().toLowerCase().contains(textoBusqueda);
         });
     }
 
     private void configurarTabla() {
-
         colAlto.setCellValueFactory(new PropertyValueFactory("dimensionesAlto"));
         colAncho.setCellValueFactory(new PropertyValueFactory("dimensionesAncho"));
         colPeso.setCellValueFactory(new PropertyValueFactory("peso"));
@@ -113,12 +123,10 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
     }
 
     private void cargarInformacionTabla() {
-
         OLpaquetes = FXCollections.observableArrayList();
         List<Paquete> listaWS = PaquetesDAO.obtenerPaquetes();
         OLpaquetes.addAll(listaWS);
         tbPaqutes.setItems(OLpaquetes);
-
     }
 
     private void irFormulario(NotificadorOperaciones observador, Paquete paquete) {

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timefast;
 
 import java.net.URL;
@@ -20,11 +16,6 @@ import modelo.pojo.Colaborador;
 import modelo.pojo.Envio;
 import modelo.pojo.respuestasPojos.RespuestaDireccion;
 
-/**
- * FXML Controller class
- *
- * @author eduar
- */
 public class FXMLVisualizarInformacionEnvioController implements Initializable {
 
     @FXML
@@ -76,7 +67,6 @@ public class FXMLVisualizarInformacionEnvioController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     public void inicializarInformacion(Envio envio) {

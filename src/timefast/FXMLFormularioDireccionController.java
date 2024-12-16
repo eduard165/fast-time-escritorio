@@ -81,7 +81,7 @@ public class FXMLFormularioDireccionController implements Initializable {
 
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion " + validarCampos(), "ERROR");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion", "ERROR");
 
         }
     }
@@ -99,15 +99,12 @@ public class FXMLFormularioDireccionController implements Initializable {
             obtenerDireccionOrigen(idEnvioOrigen);
             if (direccionEdicion.getIdDireccion() != null) {
                 isEditable = true;
-                System.out.println("ENTREEEEE");
             }
         }
         if (idEnvioDestino != null) {
             obtenerDireccionDestino(idEnvioDestino);
             if (direccionEdicion.getIdDireccion() != null) {
                 isEditable = true;
-                System.out.println("ENTREEEEE");
-
             }
         }
     }
@@ -184,7 +181,7 @@ public class FXMLFormularioDireccionController implements Initializable {
                 }
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "ERROR AL CARGAR LA INFORMACION", "ERROR");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un fallo al cargar la informacion", "ERROR");
         }
     }
 

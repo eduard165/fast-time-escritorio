@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timefast;
 
 import java.io.IOException;
@@ -21,23 +17,14 @@ import javafx.stage.Stage;
 import modelo.pojo.Colaborador;
 import utils.Utilidades;
 
-/**
- * FXML Controller class
- *
- * @author eduar
- */
 public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private Label lbInformacionColaboradorEnSesion;
     private Colaborador colaborador;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     public void inicializarValores(Colaborador colaborador) {

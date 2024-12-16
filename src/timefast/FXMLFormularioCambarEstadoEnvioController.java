@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timefast;
 
 import java.net.URL;
@@ -47,13 +42,14 @@ public class FXMLFormularioCambarEstadoEnvioController implements Initializable 
             if (newValue != null) {
                 if (newValue.getIdEstadoEnvio() == 3 || newValue.getIdEstadoEnvio() == 5) {
                     tfDescripcion.setEditable(true);
+                    tfDescripcion.setText("");
+
                 } else {
                     tfDescripcion.setEditable(false);
                     tfDescripcion.setText("Sin cambios");
                 }
             }
         });
-
     }
 
     @FXML
@@ -70,21 +66,21 @@ public class FXMLFormularioCambarEstadoEnvioController implements Initializable 
             } else {
                 Utilidades.AletaSimple(Alert.AlertType.ERROR, actualizado.getContenido(), "Error");
             }
-        }else{
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "CAMPOS NO VALIDOS", "ERROR");
+        } else {
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion", "ERROR");
         }
     }
 
     public void inicializarValores(NotificadorOperaciones observador, Envio envio) {
         this.observador = observador;
         this.envioEnviado = envio;
-        
+
         if (envio.getIdEstadoEnvio() == 3 || envio.getIdEstadoEnvio() == 5) {
             tfDescripcion.setEditable(true);
         } else {
             tfDescripcion.setEditable(false);
         }
-        
+
         tfDescripcion.setText(envio.getDescripcion());
         cbEstadosEnvio.getSelectionModel().select(buscarEstado(envio.getIdEstadoEnvio()));
 
@@ -103,22 +99,18 @@ public class FXMLFormularioCambarEstadoEnvioController implements Initializable 
     }
 
     private void cargarEnvios() {
-        try {
-            List<EstadoEnvio> envios = EnviosDAO.estadosEnvio();
-            if (envios != null && !envios.isEmpty()) {
-                this.tiposEstados = FXCollections.observableArrayList(envios);
-                cbEstadosEnvio.setItems(this.tiposEstados);
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al momento de cargar los estados de envío, inténtelo nuevamente.", "Error al cargar");
-            }
-        } catch (Exception e) {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, "Ocurrió un error al cargar los estados de envío: " + e.getMessage(), "Error");
+        List<EstadoEnvio> envios = EnviosDAO.estadosEnvio();
+        if (envios != null && !envios.isEmpty()) {
+            this.tiposEstados = FXCollections.observableArrayList(envios);
+            cbEstadosEnvio.setItems(this.tiposEstados);
+        } else {
+            cerrarVentana();
         }
     }
 
     private int buscarEstado(int idEstadoEnvio) {
         for (int i = 0; i < this.tiposEstados.size(); i++) {
-            if (this.tiposEstados.get(i).getIdEstadoEnvio()== idEstadoEnvio) {
+            if (this.tiposEstados.get(i).getIdEstadoEnvio() == idEstadoEnvio) {
 
                 return i;
             }
@@ -140,7 +132,6 @@ public class FXMLFormularioCambarEstadoEnvioController implements Initializable 
             lbErrorSeleccion.setText("Debe seleccionar un estado.");
             esValido = false;
         }
-
         return esValido;
     }
 

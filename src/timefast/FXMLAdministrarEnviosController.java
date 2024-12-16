@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,9 +20,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import modelo.dao.ClienteDAO;
+import modelo.dao.ColaboradorDAO;
 import modelo.dao.EnviosDAO;
+import modelo.pojo.Cliente;
+import modelo.pojo.Colaborador;
 import modelo.pojo.Envio;
-
 import observador.NotificadorOperaciones;
 import utils.Utilidades;
 
@@ -41,9 +43,6 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
     private TableColumn colEstatus;
     @FXML
     private TextField tfBuscador;
-
-    private ObservableList<Envio> OLenvios;
-    private FilteredList<Envio> listaFiltrada;
     @FXML
     private TableColumn colNombreColaborador;
     @FXML
@@ -52,6 +51,9 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
     private TableColumn colOrigen;
     @FXML
     private TableColumn colDestino;
+
+    private ObservableList<Envio> OLenvios;
+    private FilteredList<Envio> listaFiltrada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -98,10 +100,10 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
                 escenarioAdministrador.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, "ERROR AL CARGAR EL FORMULARIO", "EROR");
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, "No hay estados por asignar", "EROR");
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -111,7 +113,7 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
         if (envio != null) {
             irFormulario(this, envio, true);
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -122,7 +124,7 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
         if (envio != null) {
             irFormularioDireccion(this, envio.getIdEnvio(), null);
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -133,13 +135,26 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
         if (envio != null) {
             irFormularioDireccion(this, null, envio.getIdEnvio());
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
     @FXML
     private void registrarEnvio(ActionEvent event) {
-        irFormulario(this, null, false);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioEnvios.fxml"));
+            Parent root = loader.load();
+            FXMLFormularioEnviosController controlador = loader.getController();
+            controlador.inicializarValores(this, null, false);
+            Stage escenarioAdministrador = new Stage();
+            Scene scene = new Scene(root);
+            escenarioAdministrador.setScene(scene);
+            escenarioAdministrador.setTitle("Formulario de Envios");
+            escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
+            escenarioAdministrador.showAndWait();
+        } catch (Exception e) {
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "No hay clientes registrados", "ERROR");
+        }
 
     }
 
@@ -147,27 +162,30 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
     private void asignarConductor(ActionEvent event) {
         Envio envio = new Envio();
         envio = tblGestionEnvios.getSelectionModel().getSelectedItem();
+        List<Colaborador> lista = ColaboradorDAO.obtenerConductores();
+
         if (envio != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioAsignarConductor.fxml"));
-                Parent root = loader.load();
-                FXMLFormularioAsignarConductorController controlador = loader.getController();
-                if (envio.getIdColaborador() == null) {
-                    controlador.inicializarValores(this, envio, false);
-                } else {
-                    controlador.inicializarValores(this, envio, true);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioAsignarConductor.fxml"));
+                    Parent root = loader.load();
+                    FXMLFormularioAsignarConductorController controlador = loader.getController();
+                    if (envio.getIdColaborador() == null) {
+                        controlador.inicializarValores(this, envio, false);
+                    } else {
+                        controlador.inicializarValores(this, envio, true);
+                    }
+                    Stage escenarioAdministrador = new Stage();
+                    Scene scene = new Scene(root);
+                    escenarioAdministrador.setScene(scene);
+                    escenarioAdministrador.setTitle("Formulario de colaboradores");
+                    escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
+                    escenarioAdministrador.showAndWait();
+                } catch (Exception e) {
+                Utilidades.AletaSimple(Alert.AlertType.WARNING, "No existen conductores para asinar", "Error");
                 }
-                Stage escenarioAdministrador = new Stage();
-                Scene scene = new Scene(root);
-                escenarioAdministrador.setScene(scene);
-                escenarioAdministrador.setTitle("Formulario de colaboradores");
-                escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
-                escenarioAdministrador.showAndWait();
-            } catch (Exception e) {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, e.getMessage(), "EROR");
-            }
+            
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Seleccione un elemento de la tabla", "Error");
         }
     }
 
@@ -198,7 +216,7 @@ public class FXMLAdministrarEnviosController implements Initializable, Notificad
             Stage escenarioAdministrador = new Stage();
             Scene scene = new Scene(root);
             escenarioAdministrador.setScene(scene);
-            escenarioAdministrador.setTitle("Formulario de colaboradores");
+            escenarioAdministrador.setTitle("Formulario de Envios");
             escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
             escenarioAdministrador.showAndWait();
         } catch (Exception e) {

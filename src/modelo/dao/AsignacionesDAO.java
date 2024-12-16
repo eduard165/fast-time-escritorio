@@ -1,24 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.dao;
 
 import com.google.gson.Gson;
 import java.net.HttpURLConnection;
 import modelo.ConexionHTTP;
 import modelo.pojo.Asignacion;
-import modelo.pojo.Colaborador;
 import modelo.pojo.Mensaje;
-import modelo.pojo.Unidad;
 import modelo.pojo.respuestasPojos.RespuestaHTTP;
 import utils.Constantes;
 
-/**
- *
- * @author eduar
- */
 public class AsignacionesDAO {
     
     public static Mensaje registrarAsignacion(Asignacion asignacion) {

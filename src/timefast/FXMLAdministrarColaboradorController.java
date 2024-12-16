@@ -86,7 +86,7 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
         if (colaborador != null) {
             irFormulario(this, colaborador);
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -99,10 +99,10 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
                 Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha eliminado con exito", "Eliminacion exitosa");
                 cargarInformacionTabla();
             } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, "No se pudo eliminar el colaborador intentelo mas tarde", "Error al eliminar");
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Seleccione un elemento en la tabla", "Error");
         }
     }
 

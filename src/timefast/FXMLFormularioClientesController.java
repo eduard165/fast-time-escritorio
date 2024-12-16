@@ -30,8 +30,6 @@ public class FXMLFormularioClientesController implements Initializable {
     @FXML
     private Label lbErrorNombre;
     @FXML
-    private TextField tfContraseña;
-    @FXML
     private Label lbErrorApellidoPaterno;
     @FXML
     private Label lbErrorApellidoMaterno;
@@ -39,8 +37,6 @@ public class FXMLFormularioClientesController implements Initializable {
     private Label lbErrorCorreoElectronico;
     @FXML
     private Label lbErrorTelefono;
-    @FXML
-    private Label lbErrorContraseña;
 
     private Cliente clienteEdicion;
     private NotificadorOperaciones observador;
@@ -73,7 +69,6 @@ public class FXMLFormularioClientesController implements Initializable {
             this.isEditable = true;
             cargarDatosEdicion();
         }
-
     }
 
     private void cargarDatosEdicion() {
@@ -82,8 +77,6 @@ public class FXMLFormularioClientesController implements Initializable {
         tfApellidoPaterno.setText(clienteEdicion.getApellidoPaterno());
         tfCorreoElectronico.setText(clienteEdicion.getCorreoElectronico());
         tfTelefono.setText(clienteEdicion.getTelefono());
-        tfContraseña.setText(clienteEdicion.getPassword());
-
     }
 
     private void limpiarErrores() {
@@ -91,31 +84,28 @@ public class FXMLFormularioClientesController implements Initializable {
         lbErrorApellidoPaterno.setText("");
         lbErrorApellidoMaterno.setText("");
         lbErrorCorreoElectronico.setText("");
-        lbErrorContraseña.setText("");
         lbErrorTelefono.setText("");
     }
 
     private boolean validarDatos(Cliente cliente) {
         boolean valido = true;
         limpiarErrores();
-
         if (cliente.getNombre().isEmpty() || cliente.getNombre().length() > 50) {
-            lbErrorNombre.setText("El nombre debe tener hasta 50 caracteres.");
+            lbErrorNombre.setText("El nombre no es valido");
             valido = false;
         }
-
         if (cliente.getApellidoPaterno().isEmpty() || cliente.getApellidoPaterno().length() > 50) {
-            lbErrorApellidoPaterno.setText("El apellido paterno debe tener hasta 50 caracteres.");
+            lbErrorApellidoPaterno.setText("El apellido paterno no es valido");
             valido = false;
         }
 
         if (cliente.getApellidoMaterno().isEmpty() || cliente.getApellidoMaterno().length() > 50) {
-            lbErrorApellidoMaterno.setText("El apellido materno debe tener hasta 50 caracteres.");
+            lbErrorApellidoMaterno.setText("El apellido materno no es valido");
             valido = false;
         }
 
         if (cliente.getTelefono().isEmpty() || cliente.getTelefono().length() > 15) {
-            lbErrorTelefono.setText("El teléfono debe tener hasta 15 caracteres.");
+            lbErrorTelefono.setText("El teléfono no es valido");
             valido = false;
         }
 
@@ -123,12 +113,6 @@ public class FXMLFormularioClientesController implements Initializable {
             lbErrorCorreoElectronico.setText("Correo electrónico inválido.");
             valido = false;
         }
-
-        if (cliente.getPassword().isEmpty() || !cliente.getPassword().matches("^[a-zA-Z0-9]{8,}$")) {
-            lbErrorContraseña.setText("La contraseña debe tener al menos 8 caracteres y solo letras y números.");
-            valido = false;
-        }
-
         return valido;
     }
 
@@ -140,7 +124,7 @@ public class FXMLFormularioClientesController implements Initializable {
     private void registrarCliente(Cliente cliente) {
         Mensaje mjs = ClienteDAO.registrarCliente(cliente);
         if (!mjs.isError()) {
-            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Registro exitoso", "El colaborador se ha registrado con exito");
+            Utilidades.AletaSimple(Alert.AlertType.INFORMATION,  "El colaborador se ha registrado con exito", "Registro exitoso");
             cerrarVentana();
             observador.notificacionOperacion("Nuevo registro", cliente.getNombre());
         } else {
@@ -151,7 +135,7 @@ public class FXMLFormularioClientesController implements Initializable {
     private void editarDatosCliente(Cliente cliente) {
         Mensaje mjs = ClienteDAO.editarCliente(cliente);
         if (!mjs.isError()) {
-            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha editado con exito", "Edicion exitoso");
+            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha editado con exito", "Edicion exitosa");
             cerrarVentana();
             observador.notificacionOperacion("Nueva edicion", cliente.getNombre());
         } else {
@@ -166,8 +150,6 @@ public class FXMLFormularioClientesController implements Initializable {
         cliente.setApellidoMaterno(tfApellidoMaterno.getText());
         cliente.setCorreoElectronico(tfCorreoElectronico.getText());
         cliente.setTelefono(tfTelefono.getText());
-        cliente.setPassword(tfContraseña.getText());
-
         return cliente;
     }
 }
