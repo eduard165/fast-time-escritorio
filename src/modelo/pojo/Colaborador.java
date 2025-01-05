@@ -149,4 +149,9 @@ public class Colaborador {
         this.fotoBase64 = fotoBase64;
     }
 
+    @Override
+    public String toString() {
+        return   numeroPersonal + " ";
+    }
+
 }

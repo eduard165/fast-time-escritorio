@@ -241,7 +241,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             lbErrorApellidoMaterno.setText("El apellido materno no valido");
             valido = false;
         }
-        if (colaborador.getCURP().isEmpty() || colaborador.getCURP().length() > 18) {
+        if (colaborador.getCURP().isEmpty() || colaborador.getCURP().length() != 18 ) {
             lbErrorCURP.setText("El CURP debe tener hasta 18 caracteres");
             valido = false;
         }
@@ -250,17 +250,18 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             lbErrorCorreoElectronico.setText("Correo electrónico inválido");
             valido = false;
         }
-        if (colaborador.getPassword().isEmpty()
+        if (colaborador.getPassword().isEmpty() || colaborador.getPassword().length() < 8
                 || !colaborador.getPassword().matches("^[a-zA-Z0-9]{8,}$")) {
-            lbErrorContraseña.setText("La contraseña no valida");
+            lbErrorContraseña.setText("La contraseña no valida ");
             valido = false;
         }
         if (colaborador.getIdRol() == null || colaborador.getIdRol() <= 0) {
             lbErrorRol.setText("Rol no valido");
             valido = false;
         }else{
-            if(colaborador.getIdRol() == 3 || colaborador.getNumeroLicencia().isEmpty()){
-                lbNumeroLicencia.setText("Un chofer debe ingresar su licencia.");
+            if(colaborador.getIdRol() == 3 && colaborador.getNumeroLicencia().isEmpty()){
+                lbErrorNumLicencia.setText("Un chofer debe ingresar su licencia.");
+                valido = false;
             }
         }
         if (!isEditable) {

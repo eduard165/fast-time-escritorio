@@ -80,8 +80,7 @@ public class ColaboradorDAO {
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
                 fotoBase64 = gson.fromJson(respuestaWS.getContenido(), Colaborador.class);
-                System.out.println("ID Colaborador: " + fotoBase64.getIdColaborador());
-                System.out.println("Foto Base64: " + fotoBase64.getFotoBase64());
+      
             }
         } catch (Exception e) {
             System.err.println("Error al obtener la foto: " + e.getMessage());
