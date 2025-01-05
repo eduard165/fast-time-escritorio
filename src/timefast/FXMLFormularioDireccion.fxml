@@ -8,49 +8,48 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="timefast.FXMLFormularioDireccionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioDireccionController">
    <children>
-      <Pane layoutY="-7.0" prefHeight="782.0" prefWidth="683.0" style="-fx-background-color: skyblue;">
+      <Pane prefHeight="782.0" prefWidth="683.0" style="-fx-background-color: white;">
          <children>
             <ImageView fitHeight="130.0" fitWidth="132.0" layoutX="276.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../media/ubi.jpeg" />
+                  <Image url="@../media/location.png" />
                </image>
             </ImageView>
-            <TextField fx:id="tfCalle" layoutX="46.0" layoutY="301.0" prefHeight="31.0" prefWidth="277.0" />
-            <TextField fx:id="tfNumero" layoutX="361.0" layoutY="301.0" prefHeight="31.0" prefWidth="277.0" />
-            <TextField fx:id="tfColonia" layoutX="46.0" layoutY="423.0" prefHeight="31.0" prefWidth="277.0" />
-            <TextField fx:id="tfCodigoPostal" layoutX="359.0" layoutY="423.0" prefHeight="31.0" prefWidth="277.0" />
-            <Label layoutX="46.0" layoutY="261.0" text="Calle">
+            <TextField fx:id="tfCalle" layoutX="46.0" layoutY="301.0" prefHeight="31.0" prefWidth="277.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <TextField fx:id="tfNumero" layoutX="361.0" layoutY="301.0" prefHeight="31.0" prefWidth="277.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <TextField fx:id="tfColonia" layoutX="46.0" layoutY="423.0" prefHeight="31.0" prefWidth="277.0" style="-fx-background-radius: center; -fx-background-radius: 15;" />
+            <TextField fx:id="tfCodigoPostal" layoutX="359.0" layoutY="423.0" prefHeight="31.0" prefWidth="277.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <Label layoutX="163.0" layoutY="261.0" text="Calle">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="361.0" layoutY="261.0" text="Numero">
+            <Label layoutX="463.0" layoutY="261.0" text="Numero">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="46.0" layoutY="387.0" text="Colonia">
+            <Label layoutX="159.0" layoutY="387.0" text="Colonia">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="363.0" layoutY="387.0" text="Codigo Postal">
+            <Label layoutX="436.0" layoutY="387.0" text="Codigo Postal">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button layoutX="276.0" layoutY="654.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="31.0" prefWidth="132.0" text="Guardar" />
-            <ComboBox fx:id="cbMunicipios" layoutX="361.0" layoutY="540.0" prefHeight="31.0" prefWidth="196.0" />
-            <ComboBox fx:id="cbEstados" layoutX="46.0" layoutY="540.0" prefHeight="31.0" prefWidth="196.0" />
-            <Label layoutX="50.0" layoutY="510.0" text="Estado">
+            <Button layoutX="274.0" layoutY="649.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="53.0" prefWidth="162.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 25px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Guardar" />
+            <ComboBox fx:id="cbMunicipios" layoutX="362.0" layoutY="540.0" prefHeight="31.0" prefWidth="277.0" style="-fx-background-radius: 15;" />
+            <ComboBox fx:id="cbEstados" layoutX="50.0" layoutY="540.0" prefHeight="31.0" prefWidth="277.0" style="-fx-background-radius: 15;" />
+            <Label layoutX="163.0" layoutY="502.0" text="Estado">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="361.0" layoutY="510.0" text="Municipio">
+            <Label layoutX="463.0" layoutY="502.0" text="Municipio">
                <font>
                   <Font size="20.0" />
                </font>
@@ -59,18 +58,18 @@
             <Label fx:id="lbErrorNumero" layoutX="363.0" layoutY="342.0" prefHeight="21.0" prefWidth="277.0" textFill="#e40707" />
             <Label fx:id="lbErrorColonia" layoutX="46.0" layoutY="464.0" prefHeight="21.0" prefWidth="277.0" textFill="#e10e0e" />
             <Label fx:id="lbErrorCodigoPostal" layoutX="361.0" layoutY="464.0" prefHeight="21.0" prefWidth="277.0" textFill="#ee0a0a" />
-            <Label layoutX="193.0" layoutY="42.0" text="Gestiona las direcciones de Time-Fast">
+            <Label layoutX="300.0" layoutY="42.0" text=" Time-Fast">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="286.0" layoutY="6.0" text="Fomulario">
+            <Label layoutX="268.0" text="Fomulario">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="lbErrorMunicipio" layoutX="361.0" layoutY="571.0" prefHeight="21.0" prefWidth="196.0" textFill="#e10e0e" />
-            <Label fx:id="lbErrorEstado" layoutX="46.0" layoutY="571.0" prefHeight="21.0" prefWidth="196.0" textFill="#e10e0e" />
+            <Label fx:id="lbErrorMunicipio" layoutX="409.0" layoutY="582.0" prefHeight="21.0" prefWidth="196.0" textFill="#e10e0e" />
+            <Label fx:id="lbErrorEstado" layoutX="101.0" layoutY="582.0" prefHeight="21.0" prefWidth="196.0" textFill="#e10e0e" />
          </children>
       </Pane>
    </children>

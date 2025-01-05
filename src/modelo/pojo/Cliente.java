@@ -19,11 +19,12 @@ public class Cliente {
     private String correoElectronico;
     private String password;
     private String municipio;
+    private Boolean activo;
     
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correoElectronico, String password, String municipio) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correoElectronico, String password, String municipio, Boolean activo) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -32,7 +33,17 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
         this.password = password;
         this.municipio = municipio;
+        this.activo = activo;
     }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
 
     public String getMunicipio() {
         return municipio;
@@ -96,11 +107,6 @@ public class Cliente {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return  nombre + " " + apellidoPaterno + " " + apellidoMaterno;
     }
 
 }

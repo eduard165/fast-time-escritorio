@@ -20,11 +20,13 @@ public class Unidad {
     private String numeroInterno;
     private String nombreTipo;
     private String nombreColaboradorCompleto;
+    private Boolean activo;
+    private String motivoBaja;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String marca, String modelo, Integer anio, String VIN, Integer idTipoUnidad, String numeroInterno, String nombreTipo, String nombreColaboradorCompleto) {
+    public Unidad(Integer idUnidad, String marca, String modelo, Integer anio, String VIN, Integer idTipoUnidad, String numeroInterno, String nombreTipo, String nombreColaboradorCompleto, Boolean activo, String motivoBaja) {
         this.idUnidad = idUnidad;
         this.marca = marca;
         this.modelo = modelo;
@@ -34,6 +36,24 @@ public class Unidad {
         this.numeroInterno = numeroInterno;
         this.nombreTipo = nombreTipo;
         this.nombreColaboradorCompleto = nombreColaboradorCompleto;
+        this.activo = activo;
+        this.motivoBaja = motivoBaja;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public String getMotivoBaja() {
+        return motivoBaja;
+    }
+
+    public void setMotivoBaja(String motivoBaja) {
+        this.motivoBaja = motivoBaja;
     }
 
     public String getNombreColaboradorCompleto() {
@@ -107,10 +127,4 @@ public class Unidad {
     public void setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
     }
-
-    @Override
-    public String toString() {
-        return  numeroInterno ;
-    }
-    
 }

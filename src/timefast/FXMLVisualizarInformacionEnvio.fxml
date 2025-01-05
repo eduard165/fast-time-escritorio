@@ -10,28 +10,28 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLVisualizarInformacionEnvioController">
    <children>
-      <Pane prefHeight="762.0" prefWidth="978.0" style="-fx-background-color: lightcoral;">
+      <Pane prefHeight="762.0" prefWidth="972.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="350.0" layoutY="14.0" text="FORMULARIO ENVIOS">
+            <Label layoutX="378.0" layoutY="7.0" text="Detalles del Envio ">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="350.0" layoutY="50.0" text="Gestiona los envios de Time - Fast">
+            <Label layoutX="434.0" layoutY="37.0" text=" Time - Fast">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="182.0" fitWidth="200.0" layoutX="405.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="166.0" fitWidth="170.0" layoutX="414.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/envios.png" />
                </image>
             </ImageView>
             <Pane layoutY="222.0" prefHeight="543.0" prefWidth="971.0">
                <children>
-                  <Pane layoutX="-3.0" prefHeight="257.0" prefWidth="302.0" style="-fx-border-color: black;">
+                  <Pane layoutX="-3.0" prefHeight="257.0" prefWidth="302.0" style="-fx-background-color: #dcdcdc; -fx-border-color: red;">
                      <children>
-                        <Label layoutX="69.0" layoutY="14.0" text="Inf. Envio">
+                        <Label layoutX="68.0" layoutY="14.0" text="Inf. Envio">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>
@@ -46,7 +46,7 @@
                         <Label fx:id="lbDescripcion" layoutX="123.0" layoutY="170.0" />
                      </children>
                   </Pane>
-                  <Pane layoutX="299.0" prefHeight="257.0" prefWidth="332.0" style="-fx-border-color: black;">
+                  <Pane layoutX="299.0" prefHeight="257.0" prefWidth="332.0" style="-fx-background-color: #dcdcdc; -fx-border-color: yellow;">
                      <children>
                         <Label layoutX="112.0" layoutY="14.0" text="Inf. Cliente ">
                            <font>
@@ -61,7 +61,7 @@
                         <Label fx:id="lbTelefonoCliente" layoutX="87.0" layoutY="174.0" />
                      </children>
                   </Pane>
-                  <Pane layoutX="-3.0" layoutY="255.0" prefHeight="288.0" prefWidth="489.0" style="-fx-border-color: black;">
+                  <Pane layoutX="-3.0" layoutY="255.0" prefHeight="288.0" prefWidth="489.0" style="-fx-background-color: #dcdcdc; -fx-border-color: blue;">
                      <children>
                         <Label layoutX="110.0" layoutY="14.0" text="Inf. Direccion Origen">
                            <font>
@@ -82,7 +82,7 @@
                         <Label fx:id="lbEstadoOrigen" layoutX="83.0" layoutY="243.0" />
                      </children>
                   </Pane>
-                  <Pane layoutX="631.0" prefHeight="257.0" prefWidth="344.0" style="-fx-border-color: black;">
+                  <Pane layoutX="631.0" prefHeight="257.0" prefWidth="341.0" style="-fx-background-color: #dcdcdc; -fx-border-color: gray;">
                      <children>
                         <Label layoutX="92.0" layoutY="14.0" text="Inf. Conductor">
                            <font>
@@ -97,7 +97,7 @@
                         <Label fx:id="lbCorreoColaborador" layoutX="150.0" layoutY="118.0" />
                      </children>
                   </Pane>
-                  <Pane layoutX="486.0" layoutY="255.0" prefHeight="288.0" prefWidth="489.0" style="-fx-border-color: black;">
+                  <Pane layoutX="486.0" layoutY="255.0" prefHeight="288.0" prefWidth="489.0" style="-fx-background-color: #dcdcdc; -fx-border-color: black;">
                      <children>
                         <Label layoutX="115.0" layoutY="14.0" text="Inf. Direccion Destino">
                            <font>
@@ -118,12 +118,8 @@
                         <Label fx:id="lbCalleDestino" layoutX="76.0" layoutY="64.0" />
                      </children>
                   </Pane>
-               </children></Pane>
-            <ImageView fitHeight="75.0" fitWidth="156.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#regresar" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../media/back.png" />
-               </image>
-            </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

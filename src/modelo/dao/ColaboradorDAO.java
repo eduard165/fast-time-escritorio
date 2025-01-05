@@ -55,9 +55,9 @@ public class ColaboradorDAO {
 
     public static Mensaje eliminarColaborador(Integer idColaborador) {
         Mensaje respuesta = new Mensaje();
-        String urlServicio = Constantes.URL_WS + "colaboradores/eliminar/" + idColaborador;
+        String urlServicio = Constantes.URL_WS + "colaboradores/desactivar";
         try {
-            RespuestaHTTP respuestaWS = ConexionHTTP.peticionDELETE(urlServicio);
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUT(urlServicio, "idColaborador=" + idColaborador );
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
@@ -143,9 +143,25 @@ public class ColaboradorDAO {
         return colaborador;
     }
 
-    public static List<Colaborador> obtenerColaboradores() {
+    public static List<Colaborador> obtenerColaboradoresActivos() {
         List<Colaborador> colaboradores = null;
-        String url = Constantes.URL_WS + "colaboradores/obtenerTodos";
+        String url = Constantes.URL_WS + "colaboradores/obtenerTodosActivos";
+        RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                Type tipoListaColaborador = new TypeToken<List<Colaborador>>() {
+                }.getType();
+                colaboradores = gson.fromJson(respuesta.getContenido(), tipoListaColaborador);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return colaboradores;
+    }
+     public static List<Colaborador> obtenerColaboradoresInactivos() {
+        List<Colaborador> colaboradores = null;
+        String url = Constantes.URL_WS + "colaboradores/obtenerTodosInactivos";
         RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();

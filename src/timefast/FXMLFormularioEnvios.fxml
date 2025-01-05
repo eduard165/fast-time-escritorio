@@ -10,32 +10,28 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioEnviosController">
    <children>
-      <Pane prefHeight="623.0" prefWidth="771.0" style="-fx-background-color: lightcoral;">
+      <Pane prefHeight="623.0" prefWidth="771.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="44.0" layoutY="19.0" text="FORMULARIO ENVIOS">
+            <Label layoutX="238.0" layoutY="14.0" text="FORMULARIO ENVIOS">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="44.0" layoutY="55.0" text="Gestiona los envios de Time - Fast">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
+            <Label layoutX="271.0" layoutY="55.0" text="Gestiona los envios de Time - Fast" />
             <Label layoutX="130.0" layoutY="277.0" text="Numero de guia" />
-            <TextField fx:id="tfNumeroGuia" layoutX="91.0" layoutY="309.0" />
-            <TextField fx:id="tfCosto" layoutX="91.0" layoutY="428.0" />
+            <TextField fx:id="tfNumeroGuia" layoutX="91.0" layoutY="309.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <TextField fx:id="tfCosto" layoutX="91.0" layoutY="428.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
             <Label layoutX="165.0" layoutY="400.0" text="Costo" />
-            <Button layoutX="305.0" layoutY="552.0" mnemonicParsing="false" onAction="#Guardar" text="Guardar envio" />
-            <ImageView fitHeight="182.0" fitWidth="200.0" layoutX="314.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+            <Button layoutX="343.0" layoutY="512.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="57.0" prefWidth="130.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Guardar" />
+            <ImageView fitHeight="182.0" fitWidth="200.0" layoutX="307.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/envios.png" />
                </image>
             </ImageView>
             <Label fx:id="lbErrorNumeroGuia" layoutX="93.0" layoutY="338.0" prefHeight="31.0" prefWidth="182.0" textFill="#f50505" />
             <Label fx:id="lbErrorCosto" layoutX="93.0" layoutY="459.0" prefHeight="31.0" prefWidth="182.0" textFill="#f20303" />
-            <ComboBox fx:id="cbClientes" layoutX="456.0" layoutY="366.0" prefHeight="31.0" prefWidth="194.0" />
-            <Label layoutX="526.0" layoutY="338.0" text="Cliente" />
+            <ComboBox fx:id="cbClientes" layoutX="456.0" layoutY="354.0" prefHeight="31.0" prefWidth="194.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" />
+            <Label layoutX="523.0" layoutY="314.0" text="Cliente" />
             <Label fx:id="lbErrorClientes" layoutX="456.0" layoutY="394.0" prefHeight="27.0" prefWidth="194.0" textFill="#e40505" />
          </children>
       </Pane>

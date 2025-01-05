@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,8 +32,9 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
 
     private ObservableList<Cliente> OLclientes;
     private FilteredList<Cliente> listaFiltrada;
-    private Cliente cliente;
+    private Cliente cliente = new Cliente();
     private TextField txfBuscador;
+    private Boolean activos = true;
 
     @FXML
     private TableView<Cliente> tbClientes;
@@ -47,11 +50,22 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
     private TableColumn colTelefono;
     @FXML
     private TableColumn colDireccion;
+    @FXML
+    private Button btAcitovosInactivo;
+    @FXML
+    private Button btnRegistrar;
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnEliminar;
+    @FXML
+    private Button btnDireccion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btAcitovosInactivo.setStyle("-fx-background-color: green; -fx-text-fill: white;");
         configurarTabla();
-        cargarInformacionTabla();
+        cargarInformacionTablaActivos();
         listaFiltrada = new FilteredList<>(OLclientes, p -> true);
         tbClientes.setItems(listaFiltrada);
     }
@@ -89,12 +103,19 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
     private void eliminar(ActionEvent event) {
         this.cliente = tbClientes.getSelectionModel().getSelectedItem();
         if (this.cliente != null) {
-            Mensaje mjs = ClienteDAO.eliminarCliente(cliente.getIdCliente());
-            if (!mjs.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El cliente se ha eliminado con exito", "Eliminacion exitosa");
-                cargarInformacionTabla();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("Confirmar eliminación");
+            confirmacion.setHeaderText("Está a punto de eliminar al cliente: " + cliente.getNombre() + " " + cliente.getApellidoPaterno());
+            confirmacion.setContentText("¿Está seguro de que desea continuar?");
+
+            if (confirmacion.showAndWait().orElse(null) == ButtonType.OK) {
+                Mensaje mjs = ClienteDAO.eliminarCliente(cliente.getIdCliente());
+                if (!mjs.isError()) {
+                    Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El cliente se ha eliminado con éxito", "Eliminación exitosa");
+                    cargarInformacionTablaActivos();
+                } else {
+                    Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
+                }
             }
         } else {
             Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
@@ -136,9 +157,16 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
         colDireccion.setCellValueFactory(new PropertyValueFactory("municipio"));
     }
 
-    private void cargarInformacionTabla() {
+    private void cargarInformacionTablaActivos() {
         OLclientes = FXCollections.observableArrayList();
-        List<Cliente> listaWS = ClienteDAO.obtenerClientes();
+        List<Cliente> listaWS = ClienteDAO.obtenerClientesActivos();
+        OLclientes.addAll(listaWS);
+        tbClientes.setItems(OLclientes);
+    }
+
+    private void cargarInformacionTablaInactivos() {
+        OLclientes = FXCollections.observableArrayList();
+        List<Cliente> listaWS = ClienteDAO.obtenerClientesInactivos();
         OLclientes.addAll(listaWS);
         tbClientes.setItems(OLclientes);
     }
@@ -163,7 +191,29 @@ public class FXMLAdministrarClientesController implements Initializable, Notific
 
     @Override
     public void notificacionOperacion(String tipo, String nombre) {
-        cargarInformacionTabla();
+        cargarInformacionTablaActivos();
+    }
+
+    @FXML
+    private void ActivosInactivos(ActionEvent event) {
+        activos = !activos;
+        if (activos) {
+            btAcitovosInactivo.setText("ACTIVOS");
+            btAcitovosInactivo.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+            cargarInformacionTablaActivos();
+            btnRegistrar.setDisable(false);
+            btnEditar.setDisable(false);
+            btnEliminar.setDisable(false);
+            btnDireccion.setDisable(false);
+        } else {
+            btAcitovosInactivo.setText("INACTIVOS");
+            btAcitovosInactivo.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+            cargarInformacionTablaInactivos();
+            btnRegistrar.setDisable(true);
+            btnEditar.setDisable(true);
+            btnEliminar.setDisable(true);
+            btnDireccion.setDisable(true);
+        }
     }
 
 }

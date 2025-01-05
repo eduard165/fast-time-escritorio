@@ -9,18 +9,18 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLAdministrarPaquetesController">
    <children>
-      <Pane prefHeight="789.0" prefWidth="866.0" style="-fx-background-color: orange;">
+      <Pane prefHeight="731.0" prefWidth="866.0" style="-fx-background-color: WHITE;">
          <children>
-            <Label layoutX="388.0" layoutY="42.0" text="PAQUETES">
+            <Label layoutX="286.0" layoutY="42.0" text="Modulo de Paquetes">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="34.0" />
                </font>
             </Label>
-            <Button layoutX="102.0" layoutY="180.0" mnemonicParsing="false" onAction="#Agregar" prefHeight="31.0" prefWidth="186.0" text="Agregar" />
-            <Button layoutX="358.0" layoutY="180.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="186.0" text="Editar" />
-            <Button layoutX="609.0" layoutY="180.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="186.0" text="Eliminar" />
-            <TextField fx:id="tfBuscar" alignment="CENTER" layoutX="142.0" layoutY="272.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="603.0" promptText="Buscar" />
-            <TableView id="tblPaquetes" fx:id="tbPaqutes" layoutY="353.0" prefHeight="439.0" prefWidth="866.0">
+            <Button layoutX="102.0" layoutY="180.0" mnemonicParsing="false" onAction="#Agregar" prefHeight="31.0" prefWidth="186.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Agregar" />
+            <Button layoutX="358.0" layoutY="180.0" mnemonicParsing="false" onAction="#Editar" prefHeight="31.0" prefWidth="186.0" style="-fx-background-color: #fde047; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #eab308; -fx-border-radius: 5; -fx-border-width: 2;" text="Editar" />
+            <Button layoutX="609.0" layoutY="180.0" mnemonicParsing="false" onAction="#Eliminar" prefHeight="31.0" prefWidth="186.0" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #D32F2F; -fx-border-radius: 5; -fx-border-width: 2;" text="Eliminar" />
+            <TextField fx:id="tfBuscar" alignment="CENTER" layoutX="150.0" layoutY="238.0" onKeyTyped="#Buscar" prefHeight="31.0" prefWidth="603.0" promptText="Buscar" style="-fx-background-color: #F5F5F5; -fx-border-color: #BDBDBD; -fx-border-radius: 5; -fx-text-fill: #212121; -fx-font-size: 14px; -fx-padding: 5px;" />
+            <TableView id="tblPaquetes" fx:id="tbPaqutes" layoutY="292.0" prefHeight="439.0" prefWidth="866.0">
                <columns>
                   <TableColumn fx:id="colNumeroGuia" prefWidth="169.0" text="Numero de Guia" />
                   <TableColumn fx:id="colPeso" prefWidth="130.0" text="Peso" />
@@ -30,11 +30,7 @@
                   <TableColumn fx:id="colDescripcion" prefWidth="193.0" text="Descripcion " />
                </columns>
             </TableView>
-            <Label layoutX="300.0" layoutY="87.0" text="Gestiona los paquetes de Time -fast">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
+            <Label layoutX="333.0" layoutY="92.0" text="Gestiona los paquetes de Time -fast" />
          </children>
       </Pane>
    </children>

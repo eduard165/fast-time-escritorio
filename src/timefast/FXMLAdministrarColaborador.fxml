@@ -10,28 +10,29 @@
 
 <AnchorPane id="AnchorPane" prefHeight="707.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLAdministrarColaboradorController">
    <children>
-      <Pane layoutX="14.0" layoutY="13.0" prefHeight="679.0" prefWidth="868.0" style="-fx-background-color: #b9ae9e;">
+      <Pane prefHeight="707.0" prefWidth="895.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="268.0" layoutY="21.0" text="Modulo de Colaboradores">
+            <Label layoutX="278.0" layoutY="14.0" text="Modulo de Colaboradores">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="278.0" layoutY="72.0" text="Gestiona los colaboradores de Time-Fast" />
-            <Button layoutX="14.0" layoutY="116.0" mnemonicParsing="false" onAction="#registrar" prefHeight="31.0" prefWidth="178.0" text="Registrar" />
-            <TextField fx:id="txfBuscador" layoutX="233.0" layoutY="173.0" onKeyTyped="#buscar" prefHeight="31.0" prefWidth="387.0" promptText="Buscar por nombre, numero de personal o rol" />
-            <Button layoutX="324.0" layoutY="116.0" mnemonicParsing="false" onAction="#editar" prefHeight="31.0" prefWidth="178.0" text="Editar" />
-            <Button layoutX="632.0" layoutY="116.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="31.0" prefWidth="178.0" text="Eliminar" />
-            <TableView fx:id="tbColaboradores" layoutY="234.0" prefHeight="448.0" prefWidth="868.0">
+            <Label layoutX="327.0" layoutY="58.0" text="Gestiona los colaboradores de Time-Fast" />
+            <Button fx:id="btnRegistrar" layoutX="82.0" layoutY="116.0" mnemonicParsing="false" onAction="#registrar" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Registrar" />
+            <TextField fx:id="txfBuscador" layoutX="70.0" layoutY="182.0" onKeyTyped="#buscar" prefHeight="31.0" prefWidth="548.0" promptText="Buscar" style="-fx-background-color: #F5F5F5; -fx-border-color: #BDBDBD; -fx-border-radius: 5; -fx-text-fill: #212121; -fx-font-size: 14px; -fx-padding: 5px;" />
+            <Button fx:id="btnEditar" layoutX="400.0" layoutY="116.0" mnemonicParsing="false" onAction="#editar" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #fde047; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #eab308; -fx-border-radius: 5; -fx-border-width: 2;" text="Editar" />
+            <Button fx:id="btnEliminar" layoutX="686.0" layoutY="116.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #D32F2F; -fx-border-radius: 5; -fx-border-width: 2;" text="Suspender" />
+            <TableView fx:id="tbColaboradores" layoutY="234.0" prefHeight="479.0" prefWidth="895.0">
                <columns>
                   <TableColumn fx:id="colNombre" prefWidth="81.0" text="Nombre" />
                   <TableColumn fx:id="colApellidoPaterno" prefWidth="130.0" text="Apellido Paterno" />
                   <TableColumn fx:id="colApellidoMaterno" prefWidth="132.0" text="Apellido Materno" />
                   <TableColumn fx:id="colCorreoElectronico" minWidth="5.0" prefWidth="221.0" text="Correo Electronico" />
-                  <TableColumn fx:id="colRol" prefWidth="132.0" text="Rol" />
-                  <TableColumn fx:id="colNumeroPersonal" prefWidth="171.0" text="No. Personal" />
+                  <TableColumn fx:id="colRol" prefWidth="150.0" text="Rol" />
+                  <TableColumn fx:id="colNumeroPersonal" prefWidth="180.0" text="No. Personal" />
                </columns>
             </TableView>
+            <Button fx:id="btAcitovosInactivo" layoutX="686.0" layoutY="182.0" mnemonicParsing="false" onAction="#ActivosInactivos" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Activos" />
          </children>
       </Pane>
    </children>

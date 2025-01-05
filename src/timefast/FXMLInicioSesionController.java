@@ -97,7 +97,7 @@ public class FXMLInicioSesionController implements Initializable {
 
     private void verificarCredencialesSistema(String numeroPersonal, String password) {
         RespuestaColaborador respuestaLogin = LoginDAO.iniciarSesion(numeroPersonal, password);
-        if (respuestaLogin.getColaborador().getIdRol() != 3) {
+        if (respuestaLogin.getColaborador().getIdRol() != 3 && respuestaLogin.getColaborador().getActivo()) {
             if (respuestaLogin.isError() == false) {
                 colaborador = respuestaLogin.getColaborador();
                 Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "Bienvenido(a) al sistema de GymForte", "Time Fast");

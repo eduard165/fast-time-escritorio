@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timefast;
 
 import java.net.URL;
@@ -18,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,16 +46,31 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
     private TableView<Colaborador> tbColaboradores;
     @FXML
     private TableColumn colCorreoElectronico;
-    
+    @FXML
+    private Button btAcitovosInactivo;
+    @FXML
+    private Button btnRegistrar;
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnEliminar;
+
     private ObservableList<Colaborador> OLcolaboradores;
     private FilteredList<Colaborador> listaFiltrada;
-    
+    private Boolean activos = true;
+    private Colaborador colaboradorSesion;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btAcitovosInactivo.setStyle("-fx-background-color: green; -fx-text-fill: white;");
         configurarTabla();
-        cargarInformacionTabla();
+        cargarInformacionTablaActivos();
         listaFiltrada = new FilteredList<>(OLcolaboradores, p -> true);
         tbColaboradores.setItems(listaFiltrada);
+    }
+
+    public void inicializarValores(Colaborador colaborador) {
+        this.colaboradorSesion = colaborador;
     }
 
     @FXML
@@ -94,15 +106,26 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
     private void eliminar(ActionEvent event) {
         Colaborador colaborador = tbColaboradores.getSelectionModel().getSelectedItem();
         if (colaborador != null) {
-            Mensaje mjs = ColaboradorDAO.eliminarColaborador(colaborador.getIdColaborador());
-            if (!mjs.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha eliminado con exito", "Eliminacion exitosa");
-                cargarInformacionTabla();
+            if (colaborador.getIdColaborador() == this.colaboradorSesion.getIdColaborador()) {
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, "No se puede suspender el usuario en sesión", "Error al eliminar");
             } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, "No se pudo eliminar el colaborador intentelo mas tarde", "Error al eliminar");
+                Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmacion.setTitle("Confirmar eliminación");
+                confirmacion.setHeaderText("Está a punto de suspender al colaborador: " + colaborador.getNombre() + " " + colaborador.getApellidoPaterno());
+                confirmacion.setContentText("¿Está seguro de que desea continuar?");
+
+                if (confirmacion.showAndWait().orElse(null) == ButtonType.OK) {
+                    Mensaje mjs = ColaboradorDAO.eliminarColaborador(colaborador.getIdColaborador());
+                    if (!mjs.isError()) {
+                        Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha suspendido con éxito", "Suspensión exitosa");
+                        cargarInformacionTablaActivos();
+                    } else {
+                        Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al suspender");
+                    }
+                }
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Seleccione un elemento en la tabla", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
         }
     }
 
@@ -115,9 +138,16 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
         colCorreoElectronico.setCellValueFactory(new PropertyValueFactory("correoElectronico"));
     }
 
-    private void cargarInformacionTabla() {
+    private void cargarInformacionTablaActivos() {
         OLcolaboradores = FXCollections.observableArrayList();
-        List<Colaborador> listaWS = ColaboradorDAO.obtenerColaboradores();
+        List<Colaborador> listaWS = ColaboradorDAO.obtenerColaboradoresActivos();
+        OLcolaboradores.addAll(listaWS);
+        tbColaboradores.setItems(OLcolaboradores);
+    }
+
+    private void cargarInformacionTablaInactivos() {
+        OLcolaboradores = FXCollections.observableArrayList();
+        List<Colaborador> listaWS = ColaboradorDAO.obtenerColaboradoresInactivos();
         OLcolaboradores.addAll(listaWS);
         tbColaboradores.setItems(OLcolaboradores);
     }
@@ -141,6 +171,26 @@ public class FXMLAdministrarColaboradorController implements Initializable, Noti
 
     @Override
     public void notificacionOperacion(String tipo, String nombre) {
-        cargarInformacionTabla();
+        cargarInformacionTablaActivos();
+    }
+
+    @FXML
+    private void ActivosInactivos(ActionEvent event) {
+        activos = !activos;
+        if (activos) {
+            btAcitovosInactivo.setText("ACTIVOS");
+            btAcitovosInactivo.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color:  #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" );
+            cargarInformacionTablaActivos();
+            btnEditar.setDisable(false);
+            btnEliminar.setDisable(false);
+            btnRegistrar.setDisable(false);
+        } else {
+            btAcitovosInactivo.setText("INACTIVOS");
+            btAcitovosInactivo.setStyle("-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #D32F2F; -fx-border-radius: 5; -fx-border-width: 2;" );
+            cargarInformacionTablaInactivos();
+            btnEditar.setDisable(true);
+            btnEliminar.setDisable(true);
+            btnRegistrar.setDisable(true);
+        }
     }
 }

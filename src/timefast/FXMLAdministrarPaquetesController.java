@@ -71,7 +71,7 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
             escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
             escenarioAdministrador.showAndWait();
         } catch (Exception e) {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING,"No hay envios registrados" , "EROR");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "No hay envios registrados", "EROR");
         }
     }
 
@@ -90,16 +90,26 @@ public class FXMLAdministrarPaquetesController implements Initializable, Notific
     private void Eliminar(ActionEvent event) {
         Paquete paquete = tbPaqutes.getSelectionModel().getSelectedItem();
         if (paquete != null) {
-            Mensaje mjs = PaquetesDAO.eliminarPaquete(paquete.getIdPaquete());
-            if (!mjs.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El paquete se ha eliminado con exito", "Eliminacion exitosa");
-                cargarInformacionTabla();
+            if (paquete.getIdEnvio() == null) {
+                    Utilidades.AletaSimple(Alert.AlertType.WARNING, "No hay una guia previamente asignada", "Aviso");
             } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
-            }
-        } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
+                Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmacion.setTitle("Confirmar eliminación");
+                confirmacion.setHeaderText("Está a punto de eliminar el envio asignado al \npaquete con la siguiente descripcion: " + paquete.getDescripcion());
+                confirmacion.setContentText("¿Está seguro de que desea continuar?");
+
+                Mensaje mjs = PaquetesDAO.eliminarPaquete(paquete.getIdPaquete());
+                if (!mjs.isError()) {
+                    Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "!El envio ha sido removido de este paquete exitosamente!", "Eliminacion exitosa");
+                    cargarInformacionTabla();
+                } else {
+                    Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
+                }
+                }
+        }else {
+                Utilidades.AletaSimple(Alert.AlertType.WARNING, "Selecciones un elemento en la tabla para continuar", "Error");
         }
+        
     }
 
     @FXML

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="169.0" prefWidth="223.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioCambarEstadoEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="439.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioCambarEstadoEnvioController">
    <children>
-      <Pane layoutX="10.0" layoutY="10.0" prefHeight="354.0" prefWidth="297.0">
+      <Pane prefHeight="439.0" prefWidth="307.0">
          <children>
-            <Label layoutX="56.0" layoutY="44.0" text="Seleccione una opción:" />
-            <Label fx:id="lbErrorSeleccion" layoutX="58.0" layoutY="132.0" prefHeight="32.0" prefWidth="158.0" text="" textFill="#ff0505" />
-            <ComboBox fx:id="cbEstadosEnvio" layoutX="57.0" layoutY="95.0" prefWidth="150.0" />
-            <Button layoutX="101.0" layoutY="284.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
-            <Label fx:id="lbErrorDescripcion" layoutX="47.0" layoutY="244.0" prefHeight="32.0" prefWidth="186.0" text="" textFill="#ff0505" />
-            <TextField fx:id="tfDescripcion" layoutX="45.0" layoutY="221.0" />
-            <Label layoutX="101.0" layoutY="190.0" text="Descripcion" />
+            <Label layoutX="123.0" layoutY="127.0" text="Estado" />
+            <Label fx:id="lbErrorSeleccion" layoutX="71.0" layoutY="202.0" prefHeight="32.0" prefWidth="158.0" text="" textFill="#ff0505" />
+            <ComboBox fx:id="cbEstadosEnvio" layoutX="70.0" layoutY="165.0" prefWidth="150.0" />
+            <Button layoutX="100.0" layoutY="356.0" mnemonicParsing="false" onAction="#guardar" prefHeight="44.0" prefWidth="105.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Guardar" />
+            <Label fx:id="lbErrorDescripcion" layoutX="60.0" layoutY="314.0" prefHeight="32.0" prefWidth="186.0" text="" textFill="#ff0505" />
+            <TextField fx:id="tfDescripcion" layoutX="58.0" layoutY="291.0" />
+            <Label layoutX="114.0" layoutY="260.0" text="Descripcion" />
+            <Label layoutX="49.0" layoutY="14.0" text="Edicion de estado">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="115.0" layoutY="50.0" text="Time-Fast" />
          </children>
       </Pane>
    </children>

@@ -43,9 +43,10 @@ public class PaquetesDAO {
     }
      public static Mensaje eliminarPaquete(Integer idPaquete) {
         Mensaje respuesta = new Mensaje();
-        String urlServicio = Constantes.URL_WS + "paquetes/eliminar/" + idPaquete;
+        String urlServicio = Constantes.URL_WS + "paquetes/eliminar" ;
         try {
-            RespuestaHTTP respuestaWS = ConexionHTTP.peticionDELETE(urlServicio);
+            
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUT(urlServicio,"idPaquete=" + idPaquete);
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);

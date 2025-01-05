@@ -59,19 +59,19 @@ public class UnidadesDAO {
         return respuesta;
     }
 
-    public static Mensaje eliminarUnidad(int idUnidad) {
+    public static Mensaje eliminarUnidad(Unidad unidad) {
         Mensaje respuesta = new Mensaje();
-        String urlServicio = Constantes.URL_WS + "unidades/eliminar/" + idUnidad;
-
+        String urlServicio = Constantes.URL_WS + "unidades/desactivar";
         try {
-            RespuestaHTTP respuestaWS = ConexionHTTP.peticionDELETE(urlServicio);
+            Gson gson = new Gson();
+            String parametrosJSON = gson.toJson(unidad);
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUTJSON(urlServicio, parametrosJSON);
 
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
-                Gson gson = new Gson();
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
             } else {
                 respuesta.setError(true);
-                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+                respuesta.setContenido(respuestaWS.getContenido());
             }
         } catch (Exception e) {
             respuesta.setError(true);
@@ -98,9 +98,9 @@ public class UnidadesDAO {
         return tiposUnidades;
     }
 
-    public static List<Unidad> obtenerUnidades() {
+    public static List<Unidad> obtenerUnidadesActivas() {
         List<Unidad> unidades = null;
-        String urlServicio = Constantes.URL_WS + "unidades/obtenerTodos";
+        String urlServicio = Constantes.URL_WS + "unidades/obtenerActivas";
         RespuestaHTTP respuestaWS = ConexionHTTP.peticionGET(urlServicio);
 
         if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
@@ -116,5 +116,22 @@ public class UnidadesDAO {
         return unidades;
     }
 
-    
+    public static List<Unidad> obtenerUnidadesInactivas() {
+        List<Unidad> unidades = null;
+        String urlServicio = Constantes.URL_WS + "unidades/obtenerInactivas";
+        RespuestaHTTP respuestaWS = ConexionHTTP.peticionGET(urlServicio);
+
+        if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                Type tipoListaUnidad = new TypeToken<List<Unidad>>() {
+                }.getType();
+                unidades = gson.fromJson(respuestaWS.getContenido(), tipoListaUnidad);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return unidades;
+    }
+
 }

@@ -18,16 +18,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modelo.dao.ColaboradorDAO;
 import modelo.dao.UnidadesDAO;
-import modelo.pojo.Colaborador;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Unidad;
 import observador.NotificadorOperaciones;
@@ -53,14 +54,26 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
     private TableView<Unidad> tbUnidades;
     @FXML
     private TextField tfBuscar;
+    @FXML
+    private Button btAcitovosInactivo;
+    @FXML
+    private Button btnAgregar;
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnEliminar;
+    @FXML
+    private Button btnAsignarConductor;
 
+    private Boolean activos = true;
     private ObservableList<Unidad> OLunidades;
     private FilteredList<Unidad> listaFiltrada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btAcitovosInactivo.setStyle("-fx-background-color: green; -fx-text-fill: white;");
         configurarTabla();
-        cargarInformacionTabla();
+        cargarInformacionTablaActivos();
         listaFiltrada = new FilteredList<>(OLunidades, p -> true);
         tbUnidades.setItems(listaFiltrada);
     }
@@ -84,15 +97,33 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
     private void Eliminar(ActionEvent event) {
         Unidad unidad = tbUnidades.getSelectionModel().getSelectedItem();
         if (unidad != null) {
-            Mensaje msj = UnidadesDAO.eliminarUnidad(unidad.getIdUnidad());
-            if (!msj.isError()) {
-                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "La unidad se ha eliminado con exito", "Eliminacion exitosa");
-                cargarInformacionTabla();
-            } else {
-                Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al eliminar");
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("Confirmar eliminación");
+            confirmacion.setHeaderText("Está a punto de eliminar la unidad: " + unidad.getNumeroInterno());
+            confirmacion.setContentText("¿Está seguro de que desea continuar?");
+
+            if (confirmacion.showAndWait().orElse(null) == ButtonType.OK) {
+                TextInputDialog motivoDialogo = new TextInputDialog();
+                motivoDialogo.setTitle("Registrar motivo de baja");
+                motivoDialogo.setHeaderText("Ingrese el motivo de la baja de la unidad: " + unidad.getNumeroInterno());
+                motivoDialogo.setContentText("Motivo:");
+
+                String motivo = motivoDialogo.showAndWait().orElse(null);
+                unidad.setMotivoBaja(motivo);
+                if (motivo != null && !motivo.trim().isEmpty()) {
+                    Mensaje msj = UnidadesDAO.eliminarUnidad(unidad);
+                    if (!msj.isError()) {
+                        Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "La unidad se ha eliminado con éxito", "Eliminación exitosa");
+                        cargarInformacionTablaActivos();
+                    } else {
+                        Utilidades.AletaSimple(Alert.AlertType.ERROR, msj.getContenido(), "Error al eliminar");
+                    }
+                } else {
+                    Utilidades.AletaSimple(Alert.AlertType.WARNING, "Debe ingresar un motivo para proceder con la eliminación.", "Motivo requerido");
+                }
             }
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "Seleccione un elemento en la tabla para continuar", "Error");
         }
     }
 
@@ -114,25 +145,25 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
     private void asignarConductor(ActionEvent event) {
         Unidad unidad = tbUnidades.getSelectionModel().getSelectedItem();
         if (unidad != null) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAsignarConductor.fxml"));
-                    Parent root = loader.load();
-                    FXMLAsignarConductorController controlador = loader.getController();
-                    if (unidad.getNombreColaboradorCompleto().equals("Sin asignar")) {
-                        controlador.inicializarValores(this, unidad, false);
-                    } else {
-                        controlador.inicializarValores(this, unidad, true);
-                    }
-                    Stage escenarioAdministrador = new Stage();
-                    Scene scene = new Scene(root);
-                    escenarioAdministrador.setScene(scene);
-                    escenarioAdministrador.setTitle("Asignacion de conductor");
-                    escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
-                    escenarioAdministrador.showAndWait();
-                } catch (Exception e) {
-                    Utilidades.AletaSimple(Alert.AlertType.WARNING, "No existen conductores para asinar", "Error");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAsignarConductor.fxml"));
+                Parent root = loader.load();
+                FXMLAsignarConductorController controlador = loader.getController();
+                if (unidad.getNombreColaboradorCompleto().equals("Sin asignar")) {
+                    controlador.inicializarValores(this, unidad, false);
+                } else {
+                    controlador.inicializarValores(this, unidad, true);
                 }
-     
+                Stage escenarioAdministrador = new Stage();
+                Scene scene = new Scene(root);
+                escenarioAdministrador.setScene(scene);
+                escenarioAdministrador.setTitle("Asignacion de conductor");
+                escenarioAdministrador.initModality(Modality.APPLICATION_MODAL);
+                escenarioAdministrador.showAndWait();
+            } catch (Exception e) {
+                Utilidades.AletaSimple(Alert.AlertType.WARNING, "No existen conductores para asinar", "Error");
+            }
+
         } else {
             Utilidades.AletaSimple(Alert.AlertType.WARNING, "Seleccione un elemento en la tabla para continuar", "Error");
 
@@ -150,9 +181,16 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
 
     }
 
-    private void cargarInformacionTabla() {
+    private void cargarInformacionTablaActivos() {
         OLunidades = FXCollections.observableArrayList();
-        List<Unidad> listaWS = UnidadesDAO.obtenerUnidades();
+        List<Unidad> listaWS = UnidadesDAO.obtenerUnidadesActivas();
+        OLunidades.addAll(listaWS);
+        tbUnidades.setItems(OLunidades);
+    }
+
+    private void cargarInformacionTablaInactivos() {
+        OLunidades = FXCollections.observableArrayList();
+        List<Unidad> listaWS = UnidadesDAO.obtenerUnidadesInactivas();
         OLunidades.addAll(listaWS);
         tbUnidades.setItems(OLunidades);
     }
@@ -176,6 +214,28 @@ public class FXMLAdministrarUnidadesController implements Initializable, Notific
 
     @Override
     public void notificacionOperacion(String tipo, String nombre) {
-        cargarInformacionTabla();
+        cargarInformacionTablaActivos();
+    }
+
+    @FXML
+    private void ActivosInactivos(ActionEvent event) {
+        activos = !activos;
+        if (activos) {
+            btAcitovosInactivo.setText("ACTIVOS");
+            btAcitovosInactivo.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+            cargarInformacionTablaActivos();
+            btnEditar.setDisable(false);
+            btnEliminar.setDisable(false);
+            btnAgregar.setDisable(false);
+            btnAsignarConductor.setDisable(false);
+        } else {
+            btAcitovosInactivo.setText("INACTIVOS");
+            btAcitovosInactivo.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+            cargarInformacionTablaInactivos();
+            btnEditar.setDisable(true);
+            btnEliminar.setDisable(true);
+            btnAgregar.setDisable(true);
+            btnAsignarConductor.setDisable(true);
+        }
     }
 }

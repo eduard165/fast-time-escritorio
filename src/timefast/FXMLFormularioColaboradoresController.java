@@ -65,16 +65,39 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     private Label lbErrorContraseña;
     @FXML
     private Label lbErrorRol;
+    @FXML
+    private Label lbNumeroLicencia;
+    @FXML
+    private TextField tfNumeroLicencia;
+    @FXML
+    private Label lbErrorNumLicencia;
 
     private NotificadorOperaciones observador;
     private Colaborador colaboradorEdicion;
     private boolean isEditable = false;
     private File fotografia;
-    ObservableList<Rol> tiposColaboradores;
+    private ObservableList<Rol> tiposColaboradores;
+    private boolean isConductor = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTiposRoles();
+
+        cbRol.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (newValue.getIdRol() == 3) {
+                    isConductor = true;
+                    lbNumeroLicencia.setVisible(true);
+                    tfNumeroLicencia.setVisible(true);
+                    lbErrorNumLicencia.setVisible(true);
+                } else {
+                    isConductor = false;
+                    lbNumeroLicencia.setVisible(false);
+                    tfNumeroLicencia.setVisible(false);
+                    lbErrorNumLicencia.setVisible(false);
+                }
+            }
+        });
     }
 
     public void inicializarValores(NotificadorOperaciones observador, Colaborador colaboradorEdicion) {
@@ -84,7 +107,12 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             isEditable = true;
             cargarDatosEdicion();
             cargarFotoEdicion();
+        } else {
+            cbRol.getSelectionModel().select(buscarRol(1));
+            cbRol.valueProperty().setValue(cbRol.getSelectionModel().getSelectedItem());
+
         }
+
     }
 
     @FXML
@@ -147,6 +175,13 @@ public class FXMLFormularioColaboradoresController implements Initializable {
     }
 
     private void cargarDatosEdicion() {
+        if (colaboradorEdicion.getIdRol() == 3) {
+            isConductor = true;
+            lbNumeroLicencia.setVisible(true);
+            tfNumeroLicencia.setVisible(true);
+            lbErrorNumLicencia.setVisible(true);
+            tfNumeroLicencia.setText(colaboradorEdicion.getNumeroLicencia());
+        }
         tfNombre.setText(colaboradorEdicion.getNombre());
         tfApellidoMaterno.setText(colaboradorEdicion.getApellidoMaterno());
         tfApellidoPaterno.setText(colaboradorEdicion.getApellidoPaterno());
@@ -156,6 +191,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         tfNumeroPersonal.setEditable(false);
         tfPassword.setText(colaboradorEdicion.getPassword());
         cbRol.getSelectionModel().select(buscarRol(colaboradorEdicion.getIdRol()));
+
     }
 
     private int buscarRol(int idRol) {
@@ -186,6 +222,7 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         lbErrorContraseña.setText("");
         lbErrorRol.setText("");
         lbErrorNumeroPersonal.setText("");
+        lbErrorNumLicencia.setText("");
     }
 
     private boolean validarCampos(Colaborador colaborador) {
@@ -219,12 +256,16 @@ public class FXMLFormularioColaboradoresController implements Initializable {
             valido = false;
         }
         if (colaborador.getIdRol() == null || colaborador.getIdRol() <= 0) {
-            lbErrorRol.setText("El rol no valido");
+            lbErrorRol.setText("Rol no valido");
             valido = false;
+        }else{
+            if(colaborador.getIdRol() == 3 || colaborador.getNumeroLicencia().isEmpty()){
+                lbNumeroLicencia.setText("Un chofer debe ingresar su licencia.");
+            }
         }
         if (!isEditable) {
             if (colaborador.getNumeroPersonal().isEmpty() || colaborador.getNumeroPersonal().length() > 20) {
-                lbErrorNumeroPersonal.setText("El número personal debe tener hasta 20 caracteres.");
+                lbErrorNumeroPersonal.setText("Número personal invalido .");
                 valido = false;
             }
         }
@@ -276,6 +317,9 @@ public class FXMLFormularioColaboradoresController implements Initializable {
         colaborador.setPassword(tfPassword.getText());
         colaborador.setIdRol((cbRol.getSelectionModel().getSelectedItem() != null)
                 ? cbRol.getSelectionModel().getSelectedItem().getIdRol() : null);
+        if (isConductor) {
+            colaborador.setNumeroLicencia(tfNumeroLicencia.getText());
+        }
         return colaborador;
     }
 

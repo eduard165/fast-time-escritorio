@@ -56,17 +56,16 @@ public class ClienteDAO {
 
     public static Mensaje eliminarCliente(Integer idCliente) {
         Mensaje respuesta = new Mensaje();
-        String urlServicio = Constantes.URL_WS + "clientes/eliminar/" + idCliente;
+        String urlServicio = Constantes.URL_WS + "clientes/desactivar/" ;
 
         try {
-            RespuestaHTTP respuestaWS = ConexionHTTP.peticionDELETE(urlServicio);
-
+            RespuestaHTTP respuestaWS = ConexionHTTP.peticionPUT(urlServicio, "idCliente="+idCliente);
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
             } else {
                 respuesta.setError(true);
-                respuesta.setContenido("Error en el servidor: " + respuestaWS.getCodigoRespuesta());
+                respuesta.setContenido(respuesta.getContenido());
             }
         } catch (Exception e) {
             respuesta.setError(true);
@@ -75,9 +74,25 @@ public class ClienteDAO {
         return respuesta;
     }
 
-    public static List<Cliente> obtenerClientes() {
+    public static List<Cliente> obtenerClientesActivos() {
         List<Cliente> clientes = null;
-        String url = Constantes.URL_WS + "clientes/todos";
+        String url = Constantes.URL_WS + "clientes/obtenerTodosActivos";
+        RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            Gson gson = new Gson();
+            try {
+                Type tipoListaCliente = new TypeToken<List<Cliente>>() {
+                }.getType();
+                clientes = gson.fromJson(respuesta.getContenido(), tipoListaCliente);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return clientes;
+    }
+     public static List<Cliente> obtenerClientesInactivos() {
+        List<Cliente> clientes = null;
+        String url = Constantes.URL_WS + "clientes/obtenerTodosInactivos";
         RespuestaHTTP respuesta = ConexionHTTP.peticionGET(url);
         if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
             Gson gson = new Gson();

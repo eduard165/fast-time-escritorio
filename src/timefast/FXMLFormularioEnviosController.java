@@ -79,7 +79,7 @@ public class FXMLFormularioEnviosController implements Initializable {
     }
 
     private void cargarClientes() {
-        List<Cliente> clientes = ClienteDAO.obtenerClientes();
+        List<Cliente> clientes = ClienteDAO.obtenerClientesActivos();
         if (clientes != null && !clientes.isEmpty()) {
             tiposlientes = FXCollections.observableArrayList(clientes);
             cbClientes.setItems(tiposlientes);

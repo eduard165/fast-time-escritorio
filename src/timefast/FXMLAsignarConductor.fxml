@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,13 +9,18 @@
 
 <AnchorPane id="AnchorPane" prefHeight="283.0" prefWidth="238.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLAsignarConductorController">
    <children>
-      <Pane layoutX="-3.0" layoutY="-3.0" prefHeight="304.0" prefWidth="240.0" style="-fx-background-color: beige;">
+      <Pane layoutX="6.0" layoutY="-1.0" prefHeight="304.0" prefWidth="286.0" style="-fx-background-color: white;">
          <children>
-            <ComboBox fx:id="cbConductores" layoutX="45.0" layoutY="143.0" prefWidth="150.0" />
-            <Label layoutX="78.0" layoutY="111.0" text="Conductores" />
-            <Button layoutX="83.0" layoutY="239.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
-            <Label layoutX="102.0" layoutY="25.0" text="Label" />
-            <Label fx:id="lbErrorConductores" layoutX="45.0" layoutY="174.0" prefHeight="31.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbConductores" layoutX="68.0" layoutY="137.0" prefWidth="150.0" style="-fx-background-radius: 15;" />
+            <Label layoutX="101.0" layoutY="102.0" text="Conductores" />
+            <Button layoutX="93.0" layoutY="213.0" mnemonicParsing="false" onAction="#guardar" prefHeight="43.0" prefWidth="100.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Guardar" />
+            <Label fx:id="lbErrorConductores" layoutX="68.0" layoutY="168.0" prefHeight="31.0" prefWidth="150.0" />
+            <Label layoutX="19.0" layoutY="22.0" text="Asignacion de Conductor">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="111.0" layoutY="53.0" text="Time-Fast" />
          </children>
       </Pane>
    </children>

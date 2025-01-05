@@ -8,16 +8,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="836.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioClientesController">
+<AnchorPane id="AnchorPane" prefHeight="752.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioClientesController">
    <children>
-      <Pane layoutY="-2.0" prefHeight="838.0" prefWidth="844.0" style="-fx-background-color: teal;">
+      <Pane layoutY="-2.0" prefHeight="765.0" prefWidth="844.0" style="-fx-background-color: white;">
          <children>
             <Label layoutX="356.0" layoutY="26.0" text="Fomulario">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="288.0" layoutY="88.0" text="Gestiona los clientes de Time-Fast">
+            <Label layoutX="384.0" layoutY="72.0" text="Time-Fast">
                <font>
                   <Font size="18.0" />
                </font>
@@ -32,17 +32,17 @@
             <TextField fx:id="tfApellidoPaterno" layoutX="496.0" layoutY="378.0" prefHeight="31.0" prefWidth="274.0" />
             <TextField fx:id="tfTelefono" layoutX="496.0" layoutY="478.0" prefHeight="31.0" prefWidth="274.0" />
             <TextField fx:id="tfCorreoElectronico" layoutX="286.0" layoutY="566.0" prefHeight="31.0" prefWidth="274.0" />
-            <Button layoutX="356.0" layoutY="681.0" mnemonicParsing="false" onAction="#guardar" prefHeight="36.0" prefWidth="133.0" text="Guardar" />
-            <ImageView fitHeight="176.0" fitWidth="188.0" layoutX="334.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+            <Button layoutX="356.0" layoutY="681.0" mnemonicParsing="false" onAction="#guardar" prefHeight="36.0" prefWidth="133.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Guardar" />
+            <ImageView fitHeight="176.0" fitWidth="188.0" layoutX="334.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../media/diversidad.png" />
+                  <Image url="@../media/client.png" />
                </image>
             </ImageView>
-            <Label fx:id="lbErrorNombre" layoutX="53.0" layoutY="409.0" prefHeight="21.0" prefWidth="274.0" textFill="#f20606" />
-            <Label fx:id="lbErrorApellidoPaterno" layoutX="496.0" layoutY="409.0" prefHeight="21.0" prefWidth="274.0" textFill="#f50707" />
-            <Label fx:id="lbErrorApellidoMaterno" layoutX="53.0" layoutY="509.0" prefHeight="21.0" prefWidth="274.0" textFill="#eb0101" />
-            <Label fx:id="lbErrorCorreoElectronico" layoutX="286.0" layoutY="597.0" prefHeight="21.0" prefWidth="274.0" textFill="#f50505" />
-            <Label fx:id="lbErrorTelefono" layoutX="496.0" layoutY="509.0" prefHeight="21.0" prefWidth="274.0" textFill="#ff0202" />
+            <Label fx:id="lbErrorNombre" layoutX="53.0" layoutY="409.0" prefHeight="36.0" prefWidth="274.0" textFill="#f20606" />
+            <Label fx:id="lbErrorApellidoPaterno" layoutX="496.0" layoutY="409.0" prefHeight="36.0" prefWidth="274.0" textFill="#f50707" />
+            <Label fx:id="lbErrorApellidoMaterno" layoutX="53.0" layoutY="509.0" prefHeight="36.0" prefWidth="274.0" textFill="#eb0101" />
+            <Label fx:id="lbErrorCorreoElectronico" layoutX="286.0" layoutY="597.0" prefHeight="31.0" prefWidth="274.0" textFill="#f50505" />
+            <Label fx:id="lbErrorTelefono" layoutX="496.0" layoutY="509.0" prefHeight="36.0" prefWidth="274.0" textFill="#ff0202" />
          </children>
       </Pane>
    </children>

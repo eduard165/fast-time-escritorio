@@ -23,36 +23,34 @@ import utils.Constantes;
 public class ConexionHTTP {
 
     public static RespuestaHTTP peticionGET(String url) {
-        RespuestaHTTP respuesta = new RespuestaHTTP(); 
+        RespuestaHTTP respuesta = new RespuestaHTTP();
         try {
             URL urlDestino = new URL(url);
             HttpURLConnection conexionHttp = (HttpURLConnection) urlDestino.openConnection();
-            conexionHttp.setRequestMethod("GET"); 
-            int codigoRespuesta = conexionHttp.getResponseCode(); 
-            respuesta.setCodigoRespuesta(codigoRespuesta); 
-            System.out.println("Codigo WS: " + codigoRespuesta); 
-
+            conexionHttp.setRequestMethod("GET");
+            int codigoRespuesta = conexionHttp.getResponseCode();
+            respuesta.setCodigoRespuesta(codigoRespuesta);
             if (codigoRespuesta == HttpURLConnection.HTTP_OK) {
-                respuesta.setContenido(obtenerContenidoWS(conexionHttp.getInputStream())); 
+                respuesta.setContenido(obtenerContenidoWS(conexionHttp.getInputStream()));
             } else {
-                respuesta.setContenido("Código de respuesta HTTP: " + codigoRespuesta); 
+                respuesta.setContenido("Código de respuesta HTTP: " + codigoRespuesta);
             }
         } catch (MalformedURLException e) {
-            respuesta.setCodigoRespuesta(Constantes.ERROR_URL); 
+            respuesta.setCodigoRespuesta(Constantes.ERROR_URL);
             respuesta.setContenido("Error en la dirección de conexión.");
         } catch (IOException io) {
-            respuesta.setCodigoRespuesta(Constantes.ERROR_PETICION); 
+            respuesta.setCodigoRespuesta(Constantes.ERROR_PETICION);
             respuesta.setContenido("Error: no se pudo realizar la solicitud correspondiente.");
         }
-        return respuesta; 
+        return respuesta;
     }
 
     public static RespuestaHTTP peticionPOST(String url, String parametros) {
-        RespuestaHTTP respuesta = new RespuestaHTTP(); 
+        RespuestaHTTP respuesta = new RespuestaHTTP();
         try {
             URL urlDestino = new URL(url);
             HttpURLConnection conexionHttp = (HttpURLConnection) urlDestino.openConnection();
-            conexionHttp.setRequestMethod("POST"); 
+            conexionHttp.setRequestMethod("POST");
             conexionHttp.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // Define el tipo de contenido
             conexionHttp.setDoOutput(true); // Habilita el envío de datos
 
@@ -116,6 +114,8 @@ public class ConexionHTTP {
         }
         return respuesta; // Devuelve la respuesta de la petición PUT
     }
+
+   
 
     // Método para realizar una petición DELETE a una URL
     public static RespuestaHTTP peticionDELETE(String url, String parametros) {

@@ -10,19 +10,19 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timefast.FXMLFormularioUnidadesController">
    <children>
-      <Pane layoutY="8.0" prefHeight="656.0" prefWidth="777.0" style="-fx-background-color: beige;">
+      <Pane layoutY="4.0" prefHeight="656.0" prefWidth="777.0" style="-fx-background-color: WHITE;">
          <children>
-            <ImageView fitHeight="119.0" fitWidth="173.0" layoutX="315.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="237.0" fitWidth="191.0" layoutX="294.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../media/carros.png" />
+                  <Image url="@../media/UNIDAES.png" />
                </image>
             </ImageView>
-            <Label layoutX="245.0" layoutY="41.0" text="FORMULARIO UNIDADES">
+            <Label layoutX="289.0" layoutY="14.0" text="FORMULARIO ">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="29.0" />
                </font>
             </Label>
-            <Label layoutX="249.0" layoutY="83.0" text="Gestiona las unidades de Time - Fast">
+            <Label layoutX="343.0" layoutY="57.0" text=" Time - Fast">
                <font>
                   <Font size="18.0" />
                </font>
@@ -32,18 +32,18 @@
             <Label layoutX="363.0" layoutY="465.0" text="Año" />
             <Label layoutX="558.0" layoutY="260.0" text="VIN" />
             <Label layoutX="542.0" layoutY="373.0" text="Tipo Unidad" />
-            <TextField fx:id="tfMarca" alignment="CENTER" layoutX="53.0" layoutY="291.0" prefHeight="31.0" prefWidth="256.0" />
-            <TextField fx:id="tfModelo" alignment="CENTER" layoutX="54.0" layoutY="405.0" prefHeight="31.0" prefWidth="256.0" />
-            <TextField fx:id="tfAnio" alignment="CENTER" layoutX="246.0" layoutY="495.0" prefHeight="31.0" prefWidth="256.0" />
-            <TextField fx:id="tfVIN" alignment="CENTER" layoutX="442.0" layoutY="290.0" prefHeight="31.0" prefWidth="256.0" />
-            <Button layoutX="326.0" layoutY="600.0" mnemonicParsing="false" onAction="#Guardar" text="Guardar " />
+            <TextField fx:id="tfMarca" alignment="CENTER" layoutX="53.0" layoutY="291.0" prefHeight="31.0" prefWidth="256.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <TextField fx:id="tfModelo" alignment="CENTER" layoutX="54.0" layoutY="405.0" prefHeight="31.0" prefWidth="256.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <TextField fx:id="tfAnio" alignment="CENTER" layoutX="246.0" layoutY="495.0" prefHeight="31.0" prefWidth="256.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <TextField fx:id="tfVIN" alignment="CENTER" layoutX="442.0" layoutY="290.0" prefHeight="31.0" prefWidth="256.0" style="-fx-background-radius: 15; -fx-alignment: center;" />
+            <Button layoutX="326.0" layoutY="566.0" mnemonicParsing="false" onAction="#Guardar" prefHeight="49.0" prefWidth="126.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: #388E3C; -fx-border-radius: 5; -fx-border-width: 2;" text="Guardar" />
             <Label fx:id="lbErrorMarca" layoutX="52.0" layoutY="323.0" prefHeight="31.0" prefWidth="256.0" textFill="#e41212" />
             <Label fx:id="lbErrorModelo" layoutX="52.0" layoutY="438.0" prefHeight="27.0" prefWidth="256.0" textFill="#ee0606" />
             <Label fx:id="lbErrorAnio" layoutX="248.0" layoutY="528.0" prefHeight="27.0" prefWidth="256.0" textFill="#d30b0b" />
             <Label fx:id="lbErrorVIN" layoutX="442.0" layoutY="322.0" prefHeight="27.0" prefWidth="256.0" textFill="#ee0a0a" />
             <Label fx:id="lbErrorTipo" layoutX="459.0" layoutY="444.0" prefHeight="21.0" prefWidth="256.0" textFill="#fc0505" />
             <Label fx:id="lbErrorTipoUnidad" layoutX="455.0" layoutY="439.0" prefHeight="31.0" prefWidth="256.0" textFill="#f50505" />
-            <ComboBox fx:id="cbTipoUnidad" layoutX="454.0" layoutY="405.0" prefHeight="31.0" prefWidth="256.0" />
+            <ComboBox fx:id="cbTipoUnidad" layoutX="454.0" layoutY="405.0" prefHeight="31.0" prefWidth="256.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" />
          </children>
       </Pane>
    </children>
